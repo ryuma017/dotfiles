@@ -1,4 +1,10 @@
-all: zsh
+all: git zsh
+
+git:
+	ln -sf ${PWD}/.gitconfig ${HOME}/.gitconfig
+	mkdir -p ${HOME}/.config/git
+	ln -sf ${PWD}/.config/git/ignore ${HOME}/.config/git/ignore
+	touch ${HOME}/.gitconfig.local
 
 zsh:
 	ln -sf ${PWD}/.zshenv ${HOME}/.zshenv
@@ -11,4 +17,4 @@ zsh:
 	if ! [ -e ${HOME}/.zsh/.zshrc.local ]; then	cp ${PWD}/.zsh/.zshrc.local ${HOME}/.zsh/.zshrc.local; fi
 	ln -sfn ${PWD}/.zsh/.zshenv.d ${HOME}/.zsh/.zshenv.d
 
-.PHONY: all zsh
+.PHONY: all git zsh
