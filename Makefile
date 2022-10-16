@@ -1,10 +1,10 @@
 all: git starship zsh
 
 git:
-	ln -sf ${PWD}/.gitconfig ${HOME}/.gitconfig
 	mkdir -p ${HOME}/.config/git
+	ln -sf ${PWD}/.config/git/config ${HOME}/.config/git/config
+	touch ${HOME}/.config/git/config.local
 	ln -sf ${PWD}/.config/git/ignore ${HOME}/.config/git/ignore
-	touch ${HOME}/.gitconfig.local
 
 starship:
 	mkdir -p ${HOME}/.config/starship
