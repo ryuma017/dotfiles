@@ -2,7 +2,7 @@
 [ -d $(brew --prefix)/share/zsh-completions ] && \
   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
 [ -r $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh ] && \
-  source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  . $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 autoload -Uz compinit && compinit
 zstyle ":completion:*:commands" rehash 1
 zstyle ":completion:*:default" menu select=1
@@ -20,4 +20,4 @@ if type starship > /dev/null 2>&1; then
   eval "$(starship init zsh)"
 fi
 
-source $ZDOTDIR/.zshrc.local
+. $ZDOTDIR/.zshrc.local

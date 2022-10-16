@@ -29,4 +29,4 @@ setopt no_flow_control
 # homebrew
 export PATH="/opt/homebrew/bin:$PATH"
 
-source $ZDOTDIR/.zshenv.local
+. $ZDOTDIR/.zshenv.local

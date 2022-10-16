@@ -17,4 +17,4 @@ alias em='emacs'
 # emacs keybind
 bindkey -e
 
-source $ZDOTDIR/.zprofile.local
+. $ZDOTDIR/.zprofile.local
