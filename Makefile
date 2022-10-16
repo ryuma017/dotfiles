@@ -1,4 +1,4 @@
-all: git starship zsh
+all: git starship tmux zsh
 
 git:
 	mkdir -p ${HOME}/.config/git
@@ -9,6 +9,10 @@ git:
 starship:
 	mkdir -p ${HOME}/.config/starship
 	ln -sf ${PWD}/.config/starship/starship.toml ${HOME}/.config/starship/starship.toml
+
+tmux:
+	mkdir -p ${HOME}/.config/tmux
+	ln -sf ${PWD}/.config/tmux/tmux.conf ${HOME}/.config/tmux/tmux.conf
 
 zsh:
 	ln -sf ${PWD}/.zshenv ${HOME}/.zshenv
@@ -21,4 +25,4 @@ zsh:
 	if ! [ -e ${HOME}/.zsh/.zshrc.local ]; then	cp ${PWD}/.zsh/.zshrc.local ${HOME}/.zsh/.zshrc.local; fi
 	ln -sfn ${PWD}/.zsh/.zshenv.d ${HOME}/.zsh/.zshenv.d
 
-.PHONY: all git starship zsh
+.PHONY: all git starship tmux zsh
