@@ -1,4 +1,4 @@
-SHELL=/bin/sh
+SHELL=/bin/zsh
 
 all: zsh git iterm2 starship tmux
 
