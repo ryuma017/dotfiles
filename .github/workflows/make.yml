@@ -1,0 +1,14 @@
+name: Make dotfiles
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  make:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Make dotfiles
+        run: make
