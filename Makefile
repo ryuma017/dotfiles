@@ -1,3 +1,5 @@
+SHELL=/bin/sh
+
 all: zsh git iterm2 starship tmux
 
 zsh:
