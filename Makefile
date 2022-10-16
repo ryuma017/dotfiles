@@ -1,10 +1,14 @@
-all: git starship tmux zsh
+all: git iterm2 starship tmux zsh
 
 git:
 	mkdir -p ${HOME}/.config/git
 	ln -sf ${PWD}/.config/git/config ${HOME}/.config/git/config
 	touch ${HOME}/.config/git/config.local
 	ln -sf ${PWD}/.config/git/ignore ${HOME}/.config/git/ignore
+
+iterm2:
+	mkdir -p ${HOME}/.config/iterm2
+	ln -sf ${PWD}/.config/iterm2/com.googlecode.iterm2.plist ${HOME}/.config/iterm2/com.googlecode.iterm2.plist
 
 starship:
 	mkdir -p ${HOME}/.config/starship
@@ -25,4 +29,4 @@ zsh:
 	if ! [ -e ${HOME}/.zsh/.zshrc.local ]; then	cp ${PWD}/.zsh/.zshrc.local ${HOME}/.zsh/.zshrc.local; fi
 	ln -sfn ${PWD}/.zsh/.zshenv.d ${HOME}/.zsh/.zshenv.d
 
-.PHONY: all git starship tmux zsh
+.PHONY: all git iterm2 starship tmux zsh
