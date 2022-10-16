@@ -1,0 +1,72 @@
+format = """
+$jobs$hostname$username$directory\
+$git_branch$git_commit$git_state$git_status\
+$character\\$ \
+"""
+right_format = """\
+$memory_usage$cmd_duration$battery$rust$zig\
+"""
+add_newline = false
+
+[hostname]
+ssh_only = true
+ssh_symbol = ""
+trim_at = ""
+format = "[$ssh_symbol ${hostname}@]($style)"
+style = "bold fg:white bg:black"
+
+[username]
+style_root = "bold fg:red bg:black"
+style_user = "bold fg:white bg:black"
+format = "[$user]($style)"
+show_always = true
+
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+format = " [$path]($style)"
+style = "fg:blue"
+truncation_symbol = "…/"
+repo_root_style = "fg:blue"
+repo_root_format = " [ $repo_root]($repo_root_style)[$path]($style)"
+
+[character]
+format = "$symbol"
+success_symbol = " "
+error_symbol = "[.](fg:red)"
+
+[cmd_duration]
+min_time = 1_000
+format = "[\\($duration\\)]($style)"
+style = "dimmed fg:white"
+
+[memory_usage]
+threshold = 75
+format = "\\($symbol [$ram( | $swap)]($style)\\)"
+symbol = ""
+style = "dimmed fg:white"
+disabled = false
+
+[battery]
+format = "[\\(](dimmed fg:white)[$symbol$percentage]($style)[\\)](dimmed fg:white)"
+
+[[battery.display]]
+style = "bold dimmed fg:red"
+
+[git_branch]
+format = "[:](fg:white)[$branch]($style)"
+style = "fg:bright-blue"
+
+[git_status]
+format = "[$all_status$ahead_behind]($style)"
+style = "italic fg:white"
+
+[rust]
+format = " [$symbol]($style)"
+symbol = ""
+style = "fg:#f74c01"
+
+[zig]
+format = " [$symbol]($style)"
+symbol = "↯"
+style = "fg:#f7a41e"

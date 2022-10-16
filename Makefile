@@ -1,10 +1,14 @@
-all: git zsh
+all: git starship zsh
 
 git:
 	ln -sf ${PWD}/.gitconfig ${HOME}/.gitconfig
 	mkdir -p ${HOME}/.config/git
 	ln -sf ${PWD}/.config/git/ignore ${HOME}/.config/git/ignore
 	touch ${HOME}/.gitconfig.local
+
+starship:
+	mkdir -p ${HOME}/.config/starship
+	ln -sf ${PWD}/.config/starship/starship.toml ${HOME}/.config/starship/starship.toml
 
 zsh:
 	ln -sf ${PWD}/.zshenv ${HOME}/.zshenv
@@ -17,4 +21,4 @@ zsh:
 	if ! [ -e ${HOME}/.zsh/.zshrc.local ]; then	cp ${PWD}/.zsh/.zshrc.local ${HOME}/.zsh/.zshrc.local; fi
 	ln -sfn ${PWD}/.zsh/.zshenv.d ${HOME}/.zsh/.zshenv.d
 
-.PHONY: all git zsh
+.PHONY: all git starship zsh
