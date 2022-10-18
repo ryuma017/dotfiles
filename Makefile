@@ -41,16 +41,13 @@ zsh: xdg_base_dir
 		cp -v ${PWD}/.config/zsh/.zshrc.local $${ZDOTDIR}/.zshrc.local; \
 	fi
 	ln -sfnv ${PWD}/.config/zsh/.zshenv.d $${ZDOTDIR}/.zshenv.d
-	echo ${SHELL}
 
 xdg_base_dir:
 	mkdir -pv ${XDG_CONFIG_HOME}
-	mkdir -pv ${XDG_CACHE_HOME} \
-	    mkdir -pv ${XDG_CACHE_HOME}/zsh \
-		mkdir -pv ${XDG_CACHE_HOME}/starship
+	mkdir -pv ${XDG_CACHE_HOME} && cd $${_} && \
+		mkdir -pv zsh starship
 	mkdir -pv ${XDG_DATA_HOME}
-	mkdir -pv ${XDG_STATE_HOME}
-		mkdir -pv ${XDG_STATE_HOME}/zsh \
-		mkdir -pv ${XDG_STATE_HOME}/less
+	mkdir -pv ${XDG_STATE_HOME} && cd $${_} && \
+		mkdir -pv zsh less
 
 .PHONY: all zsh git iterm2 starship tmux xdg_base_dir
