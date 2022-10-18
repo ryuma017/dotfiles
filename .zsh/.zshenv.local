@@ -1,9 +1,0 @@
-if [ -d $ZDOTDIR/.zshenv.d ]; then
-  for env in $ZDOTDIR/.zshenv.d/*.zsh; do
-    if [ -r $env ]; then
-      . $env
-    fi
-  done
-fi
-
-# PATH via homebrew
