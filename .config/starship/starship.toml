@@ -42,8 +42,7 @@ style = "dimmed fg:white"
 
 [memory_usage]
 threshold = 75
-format = "\\($symbol [$ram( | $swap)]($style)\\)"
-symbol = ""
+format = "[\\($ram | $swap\\)]($style)"
 style = "dimmed fg:white"
 disabled = false
 
