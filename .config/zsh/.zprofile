@@ -11,8 +11,10 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias c='clear'
 alias pd='popd'
+alias sudo='sudo '
 alias emacs='emacs -nw'
 alias em='emacs'
+alias cat='bat'
 
 # emacs keybind
 bindkey -e
