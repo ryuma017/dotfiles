@@ -15,7 +15,9 @@ emacs:
 	ln -sfv ${PWD}/.config/emacs/inits/*.el ${XDG_CONFIG_HOME}/emacs/inits/
 	mkdir -pv ${XDG_CONFIG_HOME}/emacs/themes
 	ln -sfv ${PWD}/.config/emacs/themes/wilmersdorf-theme.el ${XDG_CONFIG_HOME}/emacs/themes/wilmersdorf-theme.el
-	emacs --batch -l ${XDG_CONFIG_HOME}/emacs/init.el -l install-packages.el
+	if type emacs > /dev/null 2>&1; then \
+		emacs --batch -l ${XDG_CONFIG_HOME}/emacs/init.el -l install-packages.el; \
+	fi
 
 git:
 	mkdir -pv ${XDG_CONFIG_HOME}/git
