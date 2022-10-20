@@ -1,11 +1,21 @@
-SHELL := /bin/zsh
+SHELL = /bin/zsh
 
 XDG_CONFIG_HOME := ${HOME}/.config
 XDG_CACHE_HOME := ${HOME}/.cache
 XDG_DATA_HOME := ${HOME}/.local/share
 XDG_STATE_HOME := ${HOME}/.local/state
 
-all: zsh git iterm2 starship tmux
+all: emacs git iterm2 starship tmux zsh
+
+emacs:
+	mkdir -pv ${XDG_CONFIG_HOME}/emacs
+	ln -sfv ${PWD}/.config/emacs/init.el ${XDG_CONFIG_HOME}/emacs/init.el
+	ln -sfv ${PWD}/.config/emacs/custom.el ${XDG_CONFIG_HOME}/emacs/custom.el
+	mkdir -pv ${XDG_CONFIG_HOME}/emacs/inits
+	ln -sfv ${PWD}/.config/emacs/inits/*.el ${XDG_CONFIG_HOME}/emacs/inits/
+	mkdir -pv ${XDG_CONFIG_HOME}/emacs/themes
+	ln -sfv ${PWD}/.config/emacs/themes/wilmersdorf-theme.el ${XDG_CONFIG_HOME}/emacs/themes/wilmersdorf-theme.el
+	emacs --batch -l ${XDG_CONFIG_HOME}/emacs/init.el -l install-packages.el
 
 git:
 	mkdir -pv ${XDG_CONFIG_HOME}/git
@@ -43,11 +53,10 @@ zsh: xdg_base_dir
 	ln -sfnv ${PWD}/.config/zsh/.zshenv.d $${ZDOTDIR}/.zshenv.d
 
 xdg_base_dir:
-	mkdir -pv ${XDG_CONFIG_HOME}
+	mkdir -pv ${XDG_CONFIG_HOME} ${XDG_DATA_HOME}
 	mkdir -pv ${XDG_CACHE_HOME} && cd $${_} && \
 		mkdir -pv zsh starship
-	mkdir -pv ${XDG_DATA_HOME}
 	mkdir -pv ${XDG_STATE_HOME} && cd $${_} && \
 		mkdir -pv zsh less
 
-.PHONY: all zsh git iterm2 starship tmux xdg_base_dir
+.PHONY: all emacs git iterm2 starship tmux zsh xdg_base_dir
