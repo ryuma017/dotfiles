@@ -3,6 +3,8 @@ if [ -x /usr/libexec/path_helper ]; then
   eval `/usr/libexec/path_helper -s`
 fi
 
+export DOTFILES_HOME=""
+
 # XDG Base Directory specification
 export XDG_CONFIG_HOME="$HOME/.config"     # user-specific configurations
 export XDG_CACHE_HOME="$HOME/.cache"       # user-specific non-essential (cached) data
@@ -27,6 +29,14 @@ setopt inc_append_history
 setopt hist_no_store
 setopt no_flow_control
 
+# homebrew
+if [ -d /opt/homebrew/bin ]; then
+  export PATH="/opt/homebrew/bin:$PATH"
+  export HOMEBREW_AUTO_UPDATE_SECS=3600
+  export HOMEBREW_CASK_OPTS="--appdir=/Applications --fontdir=$HOME/Library/Fonts"
+fi
+
+# source `$ZDOTDIR/.zshenv.d/*.zsh`
 if [ -d $ZDOTDIR/.zshenv.d ]; then
   for env in $ZDOTDIR/.zshenv.d/*.zsh; do
     if [ -r $env ]; then
