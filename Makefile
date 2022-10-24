@@ -5,7 +5,18 @@ XDG_CACHE_HOME := ${HOME}/.cache
 XDG_DATA_HOME := ${HOME}/.local/share
 XDG_STATE_HOME := ${HOME}/.local/state
 
-all: emacs git iterm2 starship tmux zsh
+all: brew emacs git iterm2 starship tmux zsh
+
+brew:
+	mkdir -pv ${XDG_CONFIG_HOME}/brew
+	ln -sfv ${PWD}/.config/brew/Brewfile ${XDG_CONFIG_HOME}/brew/Brewfile
+	type brew > /dev/null 2>&1 \
+	  	|| /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	brew update
+	brew upgrade
+	HOMEBREW_CASK_OPTS="--appdir=/Applications --fontdir=${HOME}/Library/Fonts" HOMEBREW_BUNDLE_FILE="${XDG_CONFIG_HOME}/brew/Brewfile" \
+		brew bundle -v
+	brew cleanup
 
 emacs:
 	mkdir -pv ${XDG_CONFIG_HOME}/emacs
@@ -61,4 +72,4 @@ xdg_base_dir:
 	mkdir -pv ${XDG_STATE_HOME} && cd $${_} && \
 		mkdir -pv zsh less
 
-.PHONY: all emacs git iterm2 starship tmux zsh xdg_base_dir
+.PHONY: all brew emacs git iterm2 starship tmux zsh xdg_base_dir

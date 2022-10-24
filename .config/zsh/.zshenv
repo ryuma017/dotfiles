@@ -30,11 +30,9 @@ setopt hist_no_store
 setopt no_flow_control
 
 # homebrew
-if [ -d /opt/homebrew/bin ]; then
-  export PATH="/opt/homebrew/bin:$PATH"
-  export HOMEBREW_AUTO_UPDATE_SECS=3600
-  export HOMEBREW_CASK_OPTS="--appdir=/Applications --fontdir=$HOME/Library/Fonts"
-fi
+export PATH="/opt/homebrew/bin:$PATH"
+export HOMEBREW_CASK_OPTS="--appdir=/Applications --fontdir=$HOME/Library/Fonts"
+export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME/brew/Brewfile"
 
 # source `$ZDOTDIR/.zshenv.d/*.zsh`
 if [ -d $ZDOTDIR/.zshenv.d ]; then
