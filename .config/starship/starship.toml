@@ -1,7 +1,7 @@
 format = """
 $jobs$hostname$username$directory\
 $git_branch$git_commit$git_state$git_status\
-$character\\$ \
+$character
 """
 right_format = """\
 $memory_usage$cmd_duration$battery$rust$zig\
@@ -24,16 +24,16 @@ show_always = true
 [directory]
 truncation_length = 3
 truncate_to_repo = true
-format = " [$path]($style)"
+format = ":[$path]($style)"
 style = "fg:blue"
 truncation_symbol = "…/"
 repo_root_style = "fg:blue"
-repo_root_format = " [ $repo_root]($repo_root_style)[$path]($style)"
+repo_root_format = ":[ $repo_root]($repo_root_style)[$path]($style)"
 
 [character]
-format = "$symbol"
-success_symbol = " "
-error_symbol = "[.](fg:red)"
+format = "$symbol "
+success_symbol = "\\$"
+error_symbol = "[\\$](fg:red)"
 
 [cmd_duration]
 min_time = 1_000
