@@ -1089,7 +1089,7 @@
 			<key>Non-ASCII Ligatures</key>
 			<false/>
 			<key>Normal Font</key>
-			<string>FiraCodeNerdFontComplete-Medium 14</string>
+			<string>FiraCodeNerdFontComplete-Regular 14</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Plain Text Logging</key>
@@ -1162,7 +1162,7 @@
 			<key>Thin Strokes</key>
 			<integer>4</integer>
 			<key>Transparency</key>
-			<real>0.0</real>
+			<real>0.24701628989361701</real>
 			<key>Unicode Normalization</key>
 			<integer>0</integer>
 			<key>Unicode Version</key>
