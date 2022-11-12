@@ -20,11 +20,10 @@ $ make
 
 **⚠️ Worning**
 
-This `make` command overwrites these files in `$HOME` on your machine:
+This `make` command overwrites these files in `$HOME` on your machine;
 
 - `.zshenv`
 - `.config/**` (check [`.config/`](.config/) in this repository)
 
-And also run `brew bundle` in its process.
-
+and also run `brew bundle` in its process.
 Back up these files before running `make` if you need.
