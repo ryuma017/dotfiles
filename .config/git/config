@@ -4,6 +4,7 @@
 [core]
 	editor = emacs -nw
 	pager = less -R
+	ignorecase = false
 [color]
 	ui = auto
 [init]
