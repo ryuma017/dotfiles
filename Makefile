@@ -7,6 +7,8 @@ XDG_STATE_HOME := ${HOME}/.local/state
 
 all: brew emacs git iterm2 starship tmux zsh
 
+without_brew: emacs git iterm2 starship tmux zsh
+
 brew:
 	mkdir -pv ${XDG_CONFIG_HOME}/brew
 	ln -sfv ${PWD}/.config/brew/Brewfile ${XDG_CONFIG_HOME}/brew/Brewfile
@@ -48,7 +50,7 @@ tmux:
 	mkdir -pv ${XDG_CONFIG_HOME}/tmux
 	ln -sfv ${PWD}/.config/tmux/tmux.conf ${XDG_CONFIG_HOME}/tmux/tmux.conf
 
-zsh: xdg_base_dir
+zsh: xdg_base_dirs
 	ln -sfv ${PWD}/.zshenv ${HOME}/.zshenv
 	mkdir -pv $${ZDOTDIR}
 	ln -sfv ${PWD}/.config/zsh/.zshenv $${ZDOTDIR}/.zshenv
@@ -65,11 +67,13 @@ zsh: xdg_base_dir
 	fi
 	ln -sfnv ${PWD}/.config/zsh/.zshenv.d $${ZDOTDIR}/.zshenv.d
 
-xdg_base_dir:
+xdg_base_dirs:
 	mkdir -pv ${XDG_CONFIG_HOME} ${XDG_DATA_HOME}
 	mkdir -pv ${XDG_CACHE_HOME} && cd $${_} && \
 		mkdir -pv zsh starship
 	mkdir -pv ${XDG_STATE_HOME} && cd $${_} && \
 		mkdir -pv zsh less
 
-.PHONY: all brew emacs git iterm2 starship tmux zsh xdg_base_dir
+.PHONY: all brew emacs git iterm2 starship tmux zsh xdg_base_dirs
+
+.DEFAULT_GOAL := without_brew
