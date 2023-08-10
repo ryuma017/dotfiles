@@ -1,4 +1,5 @@
 (add-to-list 'custom-theme-load-path "~/.config/emacs/themes/")
+(setq custom-theme-directory "~/.config/emacs/themes")
 
 ;; -Color Theme
 (load-theme 'wilmersdorf t t)

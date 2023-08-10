@@ -14,6 +14,7 @@
           ("C-c C-c h" . lsp-ui-doc-glance))
   :config
 
+  (setq rustic-format-on-save t)
   (add-hook 'rustic-mode-hook 'rym/rustic-mode-hook))
 
 (defun rym/rustic-mode-hook ()
@@ -43,60 +44,47 @@
   :ensure
   :commands lsp-ui-mode
   :custom
-  (lsp-ui-peek-always-show t)
+  ;; lsp-ui-doc
+  (lsp-ui-doc-enable t)
+  (lsp-ui-doc-header t)
+  (lsp-ui-doc-include-signature t)
+  (lsp-ui-doc-position 'top) ;; top, bottom, or at-point
+  (lsp-ui-doc-max-width 150)
+  (lsp-ui-doc-max-height 30)
+  (lsp-ui-doc-use-childframe t)
+  (lsp-ui-doc-use-webkit nil)
+  ;; lsp-ui-flycheck
+  (lsp-ui-flycheck-enable nil)
+  ;; lsp-ui-sideline
+  (lsp-ui-sideline-enable nil)
+  (lsp-ui-sideline-enable nil)
+  (lsp-ui-sideline-ignore-duplicate t)
+  (lsp-ui-sideline-show-symbol t)
   (lsp-ui-sideline-show-hover t)
-  (lsp-ui-doc-enable nil))
-
-
-;; inline errors
-(use-package flycheck :ensure)
-
-;; auto-completion and code snippets
-(use-package yasnippet
-  :ensure
-  :config
-  (yas-reload-all)
-  (add-hook 'prog-mode-hook 'yas-minor-mode)
-  (add-hook 'text-mode-hook 'yas-minor-mode))
-
-(use-package company
-  :ensure
+  (lsp-ui-sideline-show-diagnostics nil)
+  (lsp-ui-sideline-show-code-actions nil)
+  ;; lsp-ui-imenu
+  (lsp-ui-imenu-enable nil)
+  (lsp-ui-imenu-kind-position 'top)
+  ;; lsp-ui-peek
+  (lsp-ui-peek-enable t)
+  (lsp-ui-peek-peek-height 20)
+  (lsp-ui-peek-list-width 50)
+  (lsp-ui-peek-fontify 'on-demand) ;; never, on-demand, or always
+  :preface
+  (defun rym/toggle-lsp-ui-doc ()
+    (interactive)
+    (if lsp-ui-doc-mode
+        (progn
+          (lsp-ui-doc-mode -1)
+          (lsp-ui-doc--hide-frame))
+      (lsp-ui-doc-mode 1)))
   :bind
-  (:map company-active-map
-    ("C-n". company-select-next)
-    ("C-p". company-select-previous)
-    ("M-<". company-select-first)
-    ("M->". company-select-last))
-  (:map company-mode-map
-      ("<tab>". tab-indent-or-complete)
-      ("TAB". tab-indent-or-complete)))
-
-(defun company-yasnippet-or-completion ()
-  (interactive)
-  (or (do-yas-expand)
-      (company-complete-common)))
-
-(defun check-expansion ()
-  (save-excursion
-    (if (looking-at "\\_>") t
-      (backward-char 1)
-      (if (looking-at "\\.") t
-        (backward-char 1)
-        (if (looking-at "::") t nil)))))
-
-(defun do-yas-expand ()
-  (let ((yas/fallback-behavior 'return-nil))
-    (yas/expand)))
-
-(defun tab-indent-or-complete ()
-  (interactive)
-  (if (minibufferp)
-      (minibuffer-complete)
-    (if (or (not yas/minor-mode)
-            (null (do-yas-expand)))
-        (if (check-expansion)
-            (company-complete-common)
-          (indent-for-tab-command)))))
+  (:map lsp-mode-map
+  ("C-c C-r" . lsp-ui-peek-find-references)
+  ("C-c C-j" . lsp-ui-peek-find-definitions)
+  ("C-c i"   . lsp-ui-peek-find-implementation))
+  ("C-c d" . rym/toggle-lsp-ui-doc))
 
 ;; Create / cleanup rust scratch projects quickly
 (use-package rust-playground :ensure)
