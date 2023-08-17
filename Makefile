@@ -1,75 +1,64 @@
-SHELL = /bin/zsh
+SHELL=/bin/zsh
 
-XDG_CONFIG_HOME := ${HOME}/.config
-XDG_CACHE_HOME := ${HOME}/.cache
-XDG_DATA_HOME := ${HOME}/.local/share
-XDG_STATE_HOME := ${HOME}/.local/state
+XDG_CONFIG_HOME:=${HOME}/.config
+XDG_CACHE_HOME:=${HOME}/.cache
+XDG_DATA_HOME:=${HOME}/.local/share
+XDG_STATE_HOME:=${HOME}/.local/state
 
-all: brew emacs git iterm2 starship tmux zsh
+.PHONY: all
+.DEFAULT_GOAL := all
 
-without_brew: emacs git iterm2 starship tmux zsh
+all: alacritty brew emacs git starship tmux zsh xdg_base_dirs
+
+alacritty:
+	mkdir -p ${XDG_CONFIG_HOME}/alacritty
+	ln -sf ${PWD}/.config/alacritty/alacritty.yml ${XDG_CONFIG_HOME}/alacritty/alacritty.yml
 
 brew:
-	mkdir -pv ${XDG_CONFIG_HOME}/brew
-	ln -sfv ${PWD}/.config/brew/Brewfile ${XDG_CONFIG_HOME}/brew/Brewfile
-	type brew > /dev/null 2>&1 \
-	  	|| /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	mkdir -p ${XDG_CONFIG_HOME}/brew
+	ln -sf ${PWD}/.config/brew/Brewfile ${XDG_CONFIG_HOME}/brew/Brewfile
+	command -v brew > /dev/null 2>&1 || /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	brew update
 	brew upgrade
-	HOMEBREW_CASK_OPTS="--appdir=/Applications --fontdir=${HOME}/Library/Fonts" HOMEBREW_BUNDLE_FILE="${XDG_CONFIG_HOME}/brew/Brewfile" \
-		brew bundle -v
+	HOMEBREW_CASK_OPTS="--appdir=/Applications --fontdir=${HOME}/Library/Fonts" brew bundle --file ${XDG_CONFIG_HOME}/brew/Brewfile
 	brew cleanup
 
 emacs:
-	mkdir -pv ${XDG_CONFIG_HOME}/emacs
-	ln -sfv ${PWD}/.config/emacs/init.el ${XDG_CONFIG_HOME}/emacs/init.el
-	ln -sfv ${PWD}/.config/emacs/custom.el ${XDG_CONFIG_HOME}/emacs/custom.el
-	mkdir -pv ${XDG_CONFIG_HOME}/emacs/inits
-	ln -sfv ${PWD}/.config/emacs/inits/*.el ${XDG_CONFIG_HOME}/emacs/inits/
-	mkdir -pv ${XDG_CONFIG_HOME}/emacs/themes
-	ln -sfv ${PWD}/.config/emacs/themes/wilmersdorf-theme.el ${XDG_CONFIG_HOME}/emacs/themes/wilmersdorf-theme.el
-	if type emacs > /dev/null 2>&1; then \
-		emacs --batch -l ${XDG_CONFIG_HOME}/emacs/init.el -l install-packages.el; \
-	fi
+	mkdir -p ${XDG_CONFIG_HOME}/emacs
+	ln -sf ${PWD}/.config/emacs/init.el ${XDG_CONFIG_HOME}/emacs/init.el
+	ln -sf ${PWD}/.config/emacs/custom.el ${XDG_CONFIG_HOME}/emacs/custom.el
+	mkdir -p ${XDG_CONFIG_HOME}/emacs/inits
+	ln -sf ${PWD}/.config/emacs/inits/*.el ${XDG_CONFIG_HOME}/emacs/inits/
+	mkdir -p ${XDG_CONFIG_HOME}/emacs/themes
+	ln -sf ${PWD}/.config/emacs/themes/wilmersdorf-theme.el ${XDG_CONFIG_HOME}/emacs/themes/wilmersdorf-theme.el
+	emacs --batch -l ${XDG_CONFIG_HOME}/emacs/init.el -l install-packages.el
 
 git:
-	mkdir -pv ${XDG_CONFIG_HOME}/git
-	ln -sfv ${PWD}/.config/git/config ${XDG_CONFIG_HOME}/git/config
+	mkdir -p ${XDG_CONFIG_HOME}/git
+	ln -sf ${PWD}/.config/git/config ${XDG_CONFIG_HOME}/git/config
 	touch ${XDG_CONFIG_HOME}/git/config.local
-	ln -sfv ${PWD}/.config/git/ignore ${XDG_CONFIG_HOME}/git/ignore
+	ln -sf ${PWD}/.config/git/ignore ${XDG_CONFIG_HOME}/git/ignore
 
 starship:
-	mkdir -pv ${XDG_CONFIG_HOME}/starship
-	ln -sfv ${PWD}/.config/starship/starship.toml ${XDG_CONFIG_HOME}/starship/starship.toml
+	mkdir -p ${XDG_CONFIG_HOME}/starship
+	ln -sf ${PWD}/.config/starship/starship.toml ${XDG_CONFIG_HOME}/starship/starship.toml
 
 tmux:
-	mkdir -pv ${XDG_CONFIG_HOME}/tmux
-	ln -sfv ${PWD}/.config/tmux/tmux.conf ${XDG_CONFIG_HOME}/tmux/tmux.conf
+	mkdir -p ${XDG_CONFIG_HOME}/tmux
+	ln -sf ${PWD}/.config/tmux/tmux.conf ${XDG_CONFIG_HOME}/tmux/tmux.conf
 
 zsh: xdg_base_dirs
-	ln -sfv ${PWD}/.zshenv ${HOME}/.zshenv
-	mkdir -pv $${ZDOTDIR}
-	ln -sfv ${PWD}/.config/zsh/.zshenv $${ZDOTDIR}/.zshenv
-	if ! [ -e $${ZDOTDIR}/.zshenv.local ]; then \
-		cp -v ${PWD}/.config/zsh/.zshenv.local $${ZDOTDIR}/.zshenv.local; \
-	fi
-	ln -sfv ${PWD}/.config/zsh/.zprofile $${ZDOTDIR}/.zprofile
-	if ! [ -e $${ZDOTDIR}/.zprofile.local ]; then \
-		cp -v ${PWD}/.config/zsh/.zprofile.local $${ZDOTDIR}/.zprofile.local; \
-	fi
-	ln -sfv ${PWD}/.config/zsh/.zshrc $${ZDOTDIR}/.zshrc
-	if ! [ -e $${ZDOTDIR}/.zshrc.local ]; then \
-		cp -v ${PWD}/.config/zsh/.zshrc.local $${ZDOTDIR}/.zshrc.local; \
-	fi
-	ln -sfnv ${PWD}/.config/zsh/.zshenv.d $${ZDOTDIR}/.zshenv.d
+	ln -sf ${PWD}/.zshenv ${HOME}/.zshenv
+	mkdir -p $${ZDOTDIR}
+	ln -sf ${PWD}/.config/zsh/.zshenv $${ZDOTDIR}/.zshenv
+	if ! [ -e $${ZDOTDIR}/.zshenv.local ]; then cp ${PWD}/.config/zsh/.zshenv.local $${ZDOTDIR}/.zshenv.local; fi
+	ln -sf ${PWD}/.config/zsh/.zprofile $${ZDOTDIR}/.zprofile
+	if ! [ -e $${ZDOTDIR}/.zprofile.local ]; then cp ${PWD}/.config/zsh/.zprofile.local $${ZDOTDIR}/.zprofile.local; fi
+	ln -sf ${PWD}/.config/zsh/.zshrc $${ZDOTDIR}/.zshrc
+	if ! [ -e $${ZDOTDIR}/.zshrc.local ]; then cp ${PWD}/.config/zsh/.zshrc.local $${ZDOTDIR}/.zshrc.local; fi
+	ln -sfn ${PWD}/.config/zsh/.zshenv.d $${ZDOTDIR}/.zshenv.d
 
 xdg_base_dirs:
-	mkdir -pv ${XDG_CONFIG_HOME} ${XDG_DATA_HOME}
-	mkdir -pv ${XDG_CACHE_HOME} && cd $${_} && \
-		mkdir -pv zsh starship
-	mkdir -pv ${XDG_STATE_HOME} && cd $${_} && \
-		mkdir -pv zsh less
-
-.PHONY: all brew emacs git iterm2 starship tmux zsh xdg_base_dirs
-
-.DEFAULT_GOAL := without_brew
+	mkdir -p ${XDG_CONFIG_HOME} ${XDG_DATA_HOME}
+	mkdir -p ${XDG_CACHE_HOME} && cd $${_} && mkdir -p zsh starship
+	mkdir -p ${XDG_STATE_HOME} && cd $${_} && mkdir -p zsh less
