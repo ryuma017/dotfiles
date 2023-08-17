@@ -1,3 +1,1 @@
-if [ -r $HOME/.cargo/env ]; then
-  . $HOME/.cargo/env
-fi
+if [ -r $HOME/.cargo/env ]; then source $HOME/.cargo/env; fi

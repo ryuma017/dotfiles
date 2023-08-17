@@ -1,11 +1,16 @@
 # aliases
-if type exa > /dev/null 2>&1; then
-  alias ls='exa --icons --git'
+if command -v exa > /dev/null 2>&1; then
+  alias ls='exa --git'
   alias l='clear && ls'
-  alias la='exa -a --icons --git'
-  alias ll='exa -aahl --icons --git'
-  alias lt='exa -T -L 3 -a -I "node_modules|.git|.cache" --icons'
-  alias lta='exa -T -a -I "node_modules|.git|.cache" --color=always --icons | less -r'
+  alias la='exa -a --git'
+  alias ll='exa -aahl --git'
+  alias lt='exa -T -L 3 -a -I "node_modules|.git|.cache"'
+  alias lta='exa -T -a -I "node_modules|.git|.cache" --color=always | less -r'
+else
+  alias ls='ls --color=auto'
+  alias l='clear && ls'
+  alias la='ls -a'
+  alias ll='ls -ahl'
 fi
 
 alias ..='cd ..'
@@ -18,4 +23,4 @@ alias em='emacs -nw'
 # emacs keybind
 bindkey -e
 
-. $ZDOTDIR/.zprofile.local
+source $ZDOTDIR/.zprofile.local
