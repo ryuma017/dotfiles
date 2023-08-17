@@ -17,18 +17,18 @@ style = "bold fg:white bg:black"
 
 [username]
 style_root = "bold fg:red bg:black"
-style_user = "bold fg:white bg:black"
+style_user = "fg:white"
 format = "[$user]($style)"
 show_always = true
 
 [directory]
 truncation_length = 3
 truncate_to_repo = true
-format = ":[$path]($style)"
+format = "[:](fg:white dimmed)[$path]($style)"
 style = "fg:blue"
 truncation_symbol = "…/"
 repo_root_style = "fg:blue"
-repo_root_format = ":[ $repo_root]($repo_root_style)[$path]($style)"
+repo_root_format = "[:](fg:white dimmed)[$repo_root]($repo_root_style)[$path]($style)"
 
 [character]
 format = "$symbol "
@@ -53,7 +53,7 @@ format = "[\\(](dimmed fg:white)[$symbol$percentage]($style)[\\)](dimmed fg:whit
 style = "bold dimmed fg:red"
 
 [git_branch]
-format = "[:](fg:white)[$branch]($style)"
+format = "[:](fg:white dimmed)[$branch]($style)"
 style = "fg:bright-blue"
 
 [git_status]
