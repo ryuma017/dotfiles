@@ -38,10 +38,6 @@ git:
 	touch ${XDG_CONFIG_HOME}/git/config.local
 	ln -sfv ${PWD}/.config/git/ignore ${XDG_CONFIG_HOME}/git/ignore
 
-iterm2:
-	mkdir -pv ${XDG_CONFIG_HOME}/iterm2
-	ln -sfv ${PWD}/.config/iterm2/com.googlecode.iterm2.plist ${XDG_CONFIG_HOME}/iterm2/com.googlecode.iterm2.plist
-
 starship:
 	mkdir -pv ${XDG_CONFIG_HOME}/starship
 	ln -sfv ${PWD}/.config/starship/starship.toml ${XDG_CONFIG_HOME}/starship/starship.toml
