@@ -5,23 +5,18 @@ XDG_CACHE_HOME:=${HOME}/.cache
 XDG_DATA_HOME:=${HOME}/.local/share
 XDG_STATE_HOME:=${HOME}/.local/state
 
-.PHONY: all
+.PHONY: all alacritty brew emacs git starship tmux zsh xdg_base_dirs
 .DEFAULT_GOAL := all
 
 all: alacritty brew emacs git starship tmux zsh xdg_base_dirs
 
+brew:
+	command -v brew > /dev/null 2>&1 || /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	HOMEBREW_CASK_OPTS="--appdir=/Applications --fontdir=${HOME}/Library/Fonts" brew bundle --file ${PWD}/Brewfile
+
 alacritty:
 	mkdir -p ${XDG_CONFIG_HOME}/alacritty
 	ln -sf ${PWD}/.config/alacritty/alacritty.yml ${XDG_CONFIG_HOME}/alacritty/alacritty.yml
-
-brew:
-	mkdir -p ${XDG_CONFIG_HOME}/brew
-	ln -sf ${PWD}/.config/brew/Brewfile ${XDG_CONFIG_HOME}/brew/Brewfile
-	command -v brew > /dev/null 2>&1 || /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	brew update
-	brew upgrade
-	HOMEBREW_CASK_OPTS="--appdir=/Applications --fontdir=${HOME}/Library/Fonts" brew bundle --file ${XDG_CONFIG_HOME}/brew/Brewfile
-	brew cleanup
 
 emacs:
 	mkdir -p ${XDG_CONFIG_HOME}/emacs
