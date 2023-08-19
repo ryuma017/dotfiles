@@ -13,8 +13,6 @@ else
   alias ll='ls -ahl'
 fi
 
-alias ..='cd ..'
-alias ...='cd ../..'
 alias c='clear'
 alias pd='popd'
 alias sudo='sudo '
