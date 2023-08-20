@@ -68,7 +68,7 @@ window:
   #
   # Window opacity as a floating point number from `0.0` to `1.0`.
   # The value `0.0` is completely transparent and `1.0` is opaque.
-  opacity: 0.95
+  opacity: 1.0
 
   # Startup Mode (changes require restart)
   #
@@ -289,7 +289,7 @@ colors:
   # Allowed values are CellForeground/CellBackground, which reference the
   # affected cell, or hexadecimal colors like #ff00ff.
   selection:
-    text: '#adbac7'
+    text: CellForeground
     background: '#264f78'
 
   # Normal colors
@@ -318,15 +318,15 @@ colors:
   #
   # If the dim colors are not set, they will be calculated automatically based
   # on the `normal` colors.
-  # dim:
-  #  black:   '#131415'
-  #  red:     '#864343'
-  #  green:   '#777c44'
-  #  yellow:  '#9e824c'
-  #  blue:    '#556a7d'
-  #  magenta: '#75617b'
-  #  cyan:    '#5b7d78'
-  #  white:   '#828482'
+  dim:
+    black:   '#373d44'
+    red:     '#a14943'
+    green:   '#39703b'
+    yellow:  '#825f19'
+    blue:    '#3666a1'
+    magenta: '#74569e'
+    cyan:    '#258288'
+    white:   '#5f6770'
 
   # Indexed Colors
   #
@@ -337,12 +337,10 @@ colors:
   #   `- { index: 16, color: '#ff00ff' }`
   #
   indexed_colors:
-    - { index: 16, color: '#fe8019' }
-    - { index: 17, color: '#d65d0e' }
-    - { index: 18, color: '#3c3836' }
-    - { index: 19, color: '#504945' }
-    - { index: 20, color: '#bdae93' }
-    - { index: 21, color: '#ebdbb2' }
+    - { index: 16, color: '#22272e' }
+    - { index: 17, color: '#adbac7' }
+    - { index: 18, color: '#444c56' }
+    - { index: 19, color: '#1c2128' }
 
   # Transparent cell backgrounds
   #
