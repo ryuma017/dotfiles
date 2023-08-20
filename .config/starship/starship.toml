@@ -4,7 +4,7 @@ $git_branch$git_commit$git_state$git_status\
 $character
 """
 right_format = """\
-$memory_usage$cmd_duration$battery$rust$zig\
+$cmd_duration$battery$rust$zig\
 """
 add_newline = false
 
@@ -40,12 +40,6 @@ min_time = 1_000
 format = "[\\($duration\\)]($style)"
 style = "dimmed fg:white"
 
-[memory_usage]
-threshold = 75
-format = "[\\($ram | $swap\\)]($style)"
-style = "dimmed fg:white"
-disabled = false
-
 [battery]
 format = "[\\(](dimmed fg:white)[$symbol$percentage]($style)[\\)](dimmed fg:white)"
 
@@ -53,7 +47,7 @@ format = "[\\(](dimmed fg:white)[$symbol$percentage]($style)[\\)](dimmed fg:whit
 style = "bold dimmed fg:red"
 
 [git_branch]
-format = "[:](fg:white dimmed)[$branch]($style)"
+format = "[::](fg:white dimmed)[$branch]($style)"
 style = "fg:bright-blue"
 
 [git_status]
