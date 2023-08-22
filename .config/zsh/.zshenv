@@ -21,11 +21,6 @@ export EDITOR=emacs
 # disable less history
 export LESSHISTFILE=-
 
-# zsh_history
-HISTFILE="$XDG_STATE_HOME/zsh/history"
-HISTSIZE=1000000
-SAVEHIST=1000000
-
 # homebrew
 if [ -x "/opt/homebrew/bin/brew" ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"

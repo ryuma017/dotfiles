@@ -4,6 +4,7 @@ if command -v brew > /dev/null 2>&1; then
     fpath=( ${HOMEBREW_PREFIX}/share/zsh-completions $fpath )
   [ -r ${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh ] && \
     source ${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  [ -d ${XDG_CACHE_HOME}/zsh ] || mkdir -p ${XDG_CACHE_HOME}/zsh
   autoload -Uz compinit && compinit -d ${XDG_CACHE_HOME}/zsh/zcompdump
   zstyle ":completion:*:commands" rehash 1
   zstyle ":completion:*:default" menu select=1
@@ -55,6 +56,12 @@ if command -v brew > /dev/null 2>&1; then
     ZSH_HIGHLIGHT_STYLES[bracket-level-6]='fg=#dcbdfb'
   fi
 fi
+
+# history
+[ -d ${XDG_STATE_HOME}/zsh ] || mkdir -p ${XDG_STATE_HOME}/zsh
+HISTFILE="$XDG_STATE_HOME/zsh/history"
+HISTSIZE=1000000
+SAVEHIST=1000000
 
 # prompt
 if command -v starship > /dev/null 2>&1; then eval "$(starship init zsh)"; fi
