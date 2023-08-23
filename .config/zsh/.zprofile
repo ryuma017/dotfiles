@@ -21,4 +21,4 @@ alias em='emacs -nw'
 # emacs keybind
 bindkey -e
 
-source $ZDOTDIR/.zprofile.local
+source "${ZDOTDIR}/.zprofile.local"

@@ -1,19 +1,19 @@
 if command -v brew > /dev/null 2>&1; then
   # completion
-  [ -d ${HOMEBREW_PREFIX}/share/zsh-completions ] && \
+  [ -d "${HOMEBREW_PREFIX}/share/zsh-completions" ] && \
     fpath=( ${HOMEBREW_PREFIX}/share/zsh-completions $fpath )
-  [ -r ${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh ] && \
-    source ${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-  [ -d ${XDG_CACHE_HOME}/zsh ] || mkdir -p ${XDG_CACHE_HOME}/zsh
-  autoload -Uz compinit && compinit -d ${XDG_CACHE_HOME}/zsh/zcompdump
+  [ -r "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && \
+    source "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+  [ -d "${XDG_CACHE_HOME}/zsh" ] || mkdir -p "${XDG_CACHE_HOME}/zsh"
+  autoload -Uz compinit && compinit -d "${XDG_CACHE_HOME}/zsh/zcompdump"
   zstyle ":completion:*:commands" rehash 1
   zstyle ":completion:*:default" menu select=1
 
   # syntax highlighting
-  if [ -r ${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  if [ -r "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
     # define custom styles
     # ref: https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
-    source ${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    source "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
     typeset -A ZSH_HIGHLIGHT_STYLES
 
     # main
@@ -47,7 +47,7 @@ if command -v brew > /dev/null 2>&1; then
     ZSH_HIGHLIGHT_STYLES[arg0]='bold'
 
     # brackets
-    ZSH_HIGHLIGHT_HIGHLIGHTERS+=(brackets)
+    ZSH_HIGHLIGHT_HIGHLIGHTERS+=( brackets )
     ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=#6cb6ff'
     ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=#6bc46d'
     ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=#daaa3f'
@@ -58,8 +58,8 @@ if command -v brew > /dev/null 2>&1; then
 fi
 
 # history
-[ -d ${XDG_STATE_HOME}/zsh ] || mkdir -p ${XDG_STATE_HOME}/zsh
-HISTFILE="$XDG_STATE_HOME/zsh/history"
+[ -d "${XDG_STATE_HOME}/zsh" ] || mkdir -p "${XDG_STATE_HOME}/zsh"
+HISTFILE="${XDG_STATE_HOME}/zsh/history"
 HISTSIZE=1000000
 SAVEHIST=1000000
 
@@ -79,4 +79,4 @@ setopt share_history
 unsetopt flow_control
 unsetopt list_beep
 
-source ${ZDOTDIR}/.zshrc.local
+source "${ZDOTDIR}/.zshrc.local"
