@@ -31,9 +31,9 @@ repo_root_style = "fg:blue"
 repo_root_format = "[:](fg:white dimmed)[$repo_root]($repo_root_style)[$path]($style)"
 
 [character]
-format = "$symbol "
-success_symbol = "\\$"
-error_symbol = "[\\$](fg:red)"
+format = " $symbol "
+success_symbol = "|"
+error_symbol = "[|](fg:red)"
 
 [cmd_duration]
 min_time = 1_000
