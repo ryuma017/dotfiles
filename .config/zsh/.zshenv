@@ -12,7 +12,7 @@ typeset -U path fpath PATH FPATH
 
 # obtain default PATH and MANPATH from /etc/{paths,manpaths,paths.d/*,manpaths.d/*}
 if [ -x /usr/libexec/path_helper ]; then
-  eval `/usr/libexec/path_helper -s`
+  eval "$(/usr/libexec/path_helper -s)"
 fi
 
 # homebrew
