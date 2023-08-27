@@ -35,13 +35,13 @@ main() {
         trace ensure install_homebrew
     fi
 
-    # install all the necessary packages
-    msg "Installing" "packages via homebrew" green
-    trace ensure brew bundle --file="${DOTFILES_HOME}/Brewfile" install
-
     # clone or update dotfiles
     msg "Fetching" "ryuma017/dotfiles" green
     trace ensure clone_or_update_dotfiles_via_git
+
+    # install all the necessary packages
+    msg "Installing" "packages via homebrew" green
+    trace ensure brew bundle --file="${DOTFILES_HOME}/Brewfile" install
 
     # stow config files
     msg "Stowing" "config files into ${XDG_CONFIG_HOME}" green
