@@ -13,7 +13,7 @@ if [[ -z "${HOME:-}" ]]; then
 fi
 
 DOTFILES_REMOTE_URL="https://github.com/ryuma017/dotfiles"
-DOTFILES_HOME="${DOTFILES_HOME:-$HOME/tmp/.dotfiles}"
+DOTFILES_HOME="${DOTFILES_HOME:-$HOME/.dotfiles}"
 
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
