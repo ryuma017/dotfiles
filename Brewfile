@@ -24,6 +24,7 @@ brew "tmux-mem-cpu-load"
 brew "zsh"
 brew "zsh-autosuggestions"
 brew "zsh-completions"
+brew "zsh-syntax-highlighting"
 
 cask_args appdir: "/Applications", fontdir: "${HOME}/Library/Fonts"
 
