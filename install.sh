@@ -35,9 +35,6 @@ main() {
         trace ensure install_homebrew
     fi
 
-    # set up homebrew
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-
     # clone or update dotfiles
     msg "Fetching" "ryuma017/dotfiles" green
     trace ensure clone_or_update_dotfiles_via_git
@@ -56,6 +53,7 @@ install_homebrew() {
     require_cmd /bin/bash
 
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 }
 
 clone_or_update_dotfiles_via_git() {
