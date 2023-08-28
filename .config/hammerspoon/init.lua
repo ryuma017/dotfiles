@@ -1,0 +1,6 @@
+--
+-- For simple keyboard remapping, I am currently using Karabiner, since it has
+-- more low-level control over the keyboard. Eg, Karabiner has `vender_id` to
+-- identify keyboards, which is useful for distinguishing between the laptop
+-- keyboard and an external keyboard, which Hammerspoon does not.
+--
