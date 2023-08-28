@@ -10,10 +10,6 @@ local hotkey   = require("hs.hotkey")
 local eventtap = require("hs.eventtap")
 local alert    = require("hs.alert")
 
-local function launchOrFocusOrHide(name)
-
-end
-
 -- Create hotkeys with `hs.hotkey.new` instead of `hs.hotkey.bind`.
 -- But these hotkeys will not take effect until left-alt is pressed.
 local hotkeys = {
