@@ -46,7 +46,7 @@ zsh:
 	mkdir -p $(XDG_CONFIG_HOME)/zsh
 	ln -sf $(DOTFILES_CONFIG_HOME)/.zshenv $(HOME)/.zshenv
 	ln -sf $(DOTFILES_CONFIG_HOME)/zsh/.zshenv $(XDG_CONFIG_HOME)/zsh/.zshenv
-	ln -sf $(DOTFILES_CONFIG_HOME)/zsh/.zprofile $(XDG_CONFIG_HOME)/.zprofile
+	ln -sf $(DOTFILES_CONFIG_HOME)/zsh/.zprofile $(XDG_CONFIG_HOME)/zsh/.zprofile
 	ln -sf $(DOTFILES_CONFIG_HOME)/zsh/.zshrc $(XDG_CONFIG_HOME)/zsh/.zshrc
 	if ! [ -e $(XDG_CONFIG_HOME)/zsh/.zshenv.local ]; then \
 		cp $(DOTFILES_CONFIG_HOME)/zsh/.zshenv.local $(XDG_CONFIG_HOME)/zsh/.zshenv.local; \
