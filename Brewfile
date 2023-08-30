@@ -7,7 +7,7 @@ tap "railwaycat/emacsmacport"
 
 brew "bat"
 brew "curl"
-brew "emacs-mac", args: ["with-modern-icon", "with-imagemagick", "with-starter"]
+brew "emacs-mac", args: ["with-imagemagick", "with-modern-icon", "with-no-title-bars", "with-starter"]
 brew "exa"
 brew "git"
 brew "gnu-time"
