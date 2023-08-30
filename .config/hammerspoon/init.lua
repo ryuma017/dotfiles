@@ -28,7 +28,31 @@ local hotkeys = {
         else
             app:activate()
         end
-     end),
+    end),
+    -- launch/focus/hide Emacs
+    hotkey.new({"alt", "ctrl"}, "k", function()
+        local name = "Emacs"
+        local app = application.find(name)
+        if app == nil then
+            application.launchOrFocus(name)
+        elseif app:isFrontmost() then
+            app:hide()
+        else
+            app:activate()
+        end
+    end),
+    -- launch/focus/hide Firefox
+    hotkey.new({"alt", "ctrl"}, "l", function()
+        local name = "Firefox"
+        local app = application.find(name)
+        if app == nil then
+            application.launchOrFocus(name)
+        elseif app:isFrontmost() then
+            app:hide()
+        else
+            app:activate()
+        end
+    end),
     -- ...
 }
 
