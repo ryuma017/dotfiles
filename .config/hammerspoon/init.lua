@@ -11,14 +11,14 @@ local eventtap = require("hs.eventtap")
 local alert    = require("hs.alert")
 
 -- Create hotkeys with `hs.hotkey.new` instead of `hs.hotkey.bind`.
--- But these hotkeys will not take effect until left-alt is pressed.
+-- But these hotkeys will not take effect until left-cmd is pressed.
 local hotkeys = {
     -- health check
-    hotkey.new({"alt", "ctrl", "shift"}, "h", function()
+    hotkey.new({"cmd", "ctrl", "shift"}, "h", function()
         alert.show("Hammerspoon is healthy!")
     end),
     -- launch/focus/hide Alacritty
-    hotkey.new({"alt", "ctrl"}, "j", function()
+    hotkey.new({"cmd", "ctrl"}, "j", function()
         local name = "Alacritty"
         local app = application.find(name)
         if app == nil then
@@ -30,7 +30,7 @@ local hotkeys = {
         end
     end),
     -- launch/focus/hide Emacs
-    hotkey.new({"alt", "ctrl"}, "k", function()
+    hotkey.new({"cmd", "ctrl"}, "k", function()
         local name = "Emacs"
         local app = application.find(name)
         if app == nil then
@@ -42,7 +42,7 @@ local hotkeys = {
         end
     end),
     -- launch/focus/hide Firefox
-    hotkey.new({"alt", "ctrl"}, "l", function()
+    hotkey.new({"cmd", "ctrl"}, "l", function()
         local name = "Firefox"
         local app = application.find(name)
         if app == nil then
@@ -66,7 +66,7 @@ _et = eventtap.new(
     function(e)
         local flags = e:rawFlags()
         local masks = eventtap.event.rawFlagMasks
-        if flags & masks.deviceLeftAlternate > 0 then
+        if flags & masks.deviceLeftCommand > 0 then
             if not activated then
                 for _, v in ipairs(hotkeys) do
                     v:enable()
