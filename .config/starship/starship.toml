@@ -32,8 +32,8 @@ repo_root_format = "[:](fg:white dimmed)[$repo_root]($repo_root_style)[$path]($s
 
 [character]
 format = " $symbol "
-success_symbol = "|"
-error_symbol = "[|](fg:red)"
+success_symbol = "[|](fg:red)"
+error_symbol = "[|](italic fg:red)"
 
 [cmd_duration]
 min_time = 1_000
@@ -51,8 +51,8 @@ format = "[::](fg:white dimmed)[$branch]($style)"
 style = "fg:bright-blue"
 
 [git_status]
-format = "[$all_status$ahead_behind]($style)"
-style = "italic fg:white"
+format = " [$all_status$ahead_behind]($style)"
+style = "dimmed fg:white"
 
 [rust]
 format = " [$symbol]($style)"
