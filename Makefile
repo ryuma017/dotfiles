@@ -12,12 +12,8 @@ alacritty:
 
 emacs:
 	mkdir -p $(XDG_CONFIG_HOME)/emacs
+	ln -sf $(DOTFILES_CONFIG_HOME)/emacs/early-init.el $(XDG_CONFIG_HOME)/emacs/early-init.el
 	ln -sf $(DOTFILES_CONFIG_HOME)/emacs/init.el $(XDG_CONFIG_HOME)/emacs/init.el
-	ln -sf $(DOTFILES_CONFIG_HOME)/emacs/custom.el $(XDG_CONFIG_HOME)/emacs/custom.el
-	mkdir -p $(XDG_CONFIG_HOME)/emacs/inits
-	ln -sf $(DOTFILES_CONFIG_HOME)/emacs/inits/*.el $(XDG_CONFIG_HOME)/emacs/inits/
-	mkdir -p $(XDG_CONFIG_HOME)/emacs/themes
-	ln -sf $(DOTFILES_CONFIG_HOME)/emacs/themes/wilmersdorf-theme.el $(XDG_CONFIG_HOME)/emacs/themes/wilmersdorf-theme.el
 
 git:
 	mkdir -p $(XDG_CONFIG_HOME)/git
@@ -44,7 +40,7 @@ tmux:
 
 zsh:
 	mkdir -p $(XDG_CONFIG_HOME)/zsh
-	ln -sf $(DOTFILES_CONFIG_HOME)/.zshenv $(HOME)/.zshenv
+	ln -sf $(DOTFILES_HOME)/.zshenv $(HOME)/.zshenv
 	ln -sf $(DOTFILES_CONFIG_HOME)/zsh/.zshenv $(XDG_CONFIG_HOME)/zsh/.zshenv
 	ln -sf $(DOTFILES_CONFIG_HOME)/zsh/.zprofile $(XDG_CONFIG_HOME)/zsh/.zprofile
 	ln -sf $(DOTFILES_CONFIG_HOME)/zsh/.zshrc $(XDG_CONFIG_HOME)/zsh/.zshrc
@@ -61,4 +57,3 @@ zsh:
 	ln -sfn $(DOTFILES_CONFIG_HOME)/zsh/.zshenv.d $(XDG_CONFIG_HOME)/zsh/.zshenv.d
 
 all: alacritty emacs git hammerspoon karabiner starship tmux zsh
-
