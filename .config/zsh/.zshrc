@@ -10,6 +10,7 @@ if command -v brew > /dev/null 2>&1; then
   zstyle ":completion:*:default" menu select=1
 
   # syntax highlighting
+  zle_highlight=( region:fg=#adbac7,bg=#264f78 )
   if [ -r "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
     # define custom styles
     # ref: https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
