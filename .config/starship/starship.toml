@@ -51,8 +51,8 @@ format = "[::](fg:white dimmed)[$branch]($style)"
 style = "fg:bright-blue"
 
 [git_status]
-format = " [$all_status$ahead_behind]($style)"
-style = "dimmed fg:white"
+format = "( [$all_status$ahead_behind]($style))"
+style = "fg:bright-blue"
 
 [rust]
 format = " [$symbol]($style)"
