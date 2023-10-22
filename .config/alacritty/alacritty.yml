@@ -200,8 +200,8 @@ font:
 colors:
   # Default colors
   primary:
-    background: '#22272e'
-    foreground: '#adbac7'
+    background: '0x2d2d2d'
+    foreground: '0xcccccc'
 
     # Bright and dim foreground colors
     #
@@ -219,8 +219,8 @@ colors:
   # Allowed values are CellForeground/CellBackground, which reference the
   # affected cell, or hexadecimal colors like #ff00ff.
   cursor:
-    text: '#22272e'
-    cursor: '#539bf5'
+    text: CellForeground
+    cursor: '0x6699cc'
 
   # Vi mode cursor colors
   #
@@ -288,45 +288,45 @@ colors:
   #
   # Allowed values are CellForeground/CellBackground, which reference the
   # affected cell, or hexadecimal colors like #ff00ff.
-  selection:
-    text: CellForeground
-    background: '#264f78'
+  #selection:
+  #  text: CellForeground
+  #  background: CellBackground
 
   # Normal colors
   normal:
-    black:   '#545d68'
-    red:     '#f47067'
-    green:   '#57ab5a'
-    yellow:  '#c69026'
-    blue:    '#539bf5'
-    magenta: '#b083f0'
-    cyan:    '#39c5cf'
-    white:   '#909dab'
+    black:   '0x2d2d2d'
+    red:     '0xf2777a'
+    green:   '0x99cc99'
+    yellow:  '0xffcc66'
+    blue:    '0x6699cc'
+    magenta: '0xcc99cc'
+    cyan:    '0x66cccc'
+    white:   '0xcccccc'
 
   # Bright colors
   bright:
-    black:   '#636e7b'
-    red:     '#ff938a'
-    green:   '#6bc46d'
-    yellow:  '#daaa3f'
-    blue:    '#6cb6ff'
-    magenta: '#dcbdfb'
-    cyan:    '#56d4dd'
-    white:   '#cdd9e5'
+    black:   '0x999999'
+    red:     '0xf2777a'
+    green:   '0x99cc99'
+    yellow:  '0xffcc66'
+    blue:    '0x6699cc'
+    magenta: '0xcc99cc'
+    cyan:    '0x66cccc'
+    white:   '0xffffff'
 
   # Dim colors
   #
   # If the dim colors are not set, they will be calculated automatically based
   # on the `normal` colors.
-  dim:
-    black:   '#373d44'
-    red:     '#a14943'
-    green:   '#39703b'
-    yellow:  '#825f19'
-    blue:    '#3666a1'
-    magenta: '#74569e'
-    cyan:    '#258288'
-    white:   '#5f6770'
+  #dim:
+  #  black:   '#373d44'
+  #  red:     '#a14943'
+  #  green:   '#39703b'
+  #  yellow:  '#825f19'
+  #  blue:    '#3666a1'
+  #  magenta: '#74569e'
+  #  cyan:    '#258288'
+  #  white:   '#5f6770'
 
   # Indexed Colors
   #
@@ -337,10 +337,12 @@ colors:
   #   `- { index: 16, color: '#ff00ff' }`
   #
   indexed_colors:
-    - { index: 16, color: '#22272e' }
-    - { index: 17, color: '#adbac7' }
-    - { index: 18, color: '#444c56' }
-    - { index: 19, color: '#1c2128' }
+    - { index: 16, color: '0xf99157' }
+    - { index: 17, color: '0xa3685a' }
+    - { index: 18, color: '0x393939' }
+    - { index: 19, color: '0x515151' }
+    - { index: 20, color: '0xb4b7b4' }
+    - { index: 21, color: '0xe0e0e0' }
 
   # Transparent cell backgrounds
   #
@@ -459,7 +461,7 @@ shell:
   args:
     - -l
     - -c
-    - 'tmux a -t default || tmux new -s default'
+    - 'tmux a || tmux a -t stuff || tmux new -s stuff'
 
 # Startup directory
 #

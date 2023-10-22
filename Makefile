@@ -2,18 +2,18 @@ XDG_CONFIG_HOME ?= $(HOME)/.config
 DOTFILES_HOME ?= $(HOME)/.dotfiles
 DOTFILES_CONFIG_HOME := $(DOTFILES_HOME)/.config
 
+test:
+	@echo $(XDG_CONFIG_HOME)
+	@echo $(DOTFILES_HOME)
+	@echo $(DOTFILES_CONFIG_HOME)
+
 .DEFAULT_GOAL := all
 
-.PHONY: alacritty emacs git hammerspoon karabiner starship tmux zsh
+.PHONY: alacritty git hammerspoon karabiner starship tmux zsh
 
 alacritty:
 	mkdir -p $(XDG_CONFIG_HOME)/alacritty
 	ln -sf $(DOTFILES_CONFIG_HOME)/alacritty/alacritty.yml $(XDG_CONFIG_HOME)/alacritty/alacritty.yml
-
-emacs:
-	mkdir -p $(XDG_CONFIG_HOME)/emacs
-	ln -sf $(DOTFILES_CONFIG_HOME)/emacs/early-init.el $(XDG_CONFIG_HOME)/emacs/early-init.el
-	ln -sf $(DOTFILES_CONFIG_HOME)/emacs/init.el $(XDG_CONFIG_HOME)/emacs/init.el
 
 git:
 	mkdir -p $(XDG_CONFIG_HOME)/git
@@ -56,4 +56,4 @@ zsh:
 
 	ln -sfn $(DOTFILES_CONFIG_HOME)/zsh/.zshenv.d $(XDG_CONFIG_HOME)/zsh/.zshenv.d
 
-all: alacritty emacs git hammerspoon karabiner starship tmux zsh
+all: alacritty git hammerspoon karabiner starship tmux zsh

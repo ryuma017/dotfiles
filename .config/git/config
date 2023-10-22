@@ -2,7 +2,7 @@
 	name = Ryuma Taguchi
 	email = tgcrym01@gmail.com
 [core]
-	editor = emacs -nw
+	editor = nvim
 	pager = less -R
 	ignorecase = false
 [color]
@@ -17,12 +17,8 @@
 	default = simple
 [alias]
 	st = status
-	br = branch
-	ca = commit -a
 	co = checkout
-	ps = push
-	pl = pull
-	amend = commit --amend
+	amend = commit -a --amend -C HEAD
 	logo = log --oneline
 	logp = log --stat --decorate=short --pretty=format:'%C(yellow)%h %Cgreen%cr %Cblue%cn%Cred%d %Creset%s %C(cyan)%b'
 	sync = !git checkout main && git pull origin main && git fetch -p origin && git branch -d $(git branch --merged | grep -v main | grep -v '*')

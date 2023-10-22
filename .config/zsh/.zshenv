@@ -23,7 +23,7 @@ fi
 if [ -d "${ZDOTDIR}/.zshenv.d" ]; then
   for env in "${ZDOTDIR}/.zshenv.d"/*; do
     if [ -r "$env" ]; then
-      source "$env"
+      . "$env"
     fi
   done
 fi
@@ -32,9 +32,9 @@ fi
 export TERMINFO_DIRS="${XDG_DATA_HOME}/terminfo${TERMINFO_DIRS+:}"
 
 # editor
-export EDITOR=emacs
+export EDITOR=nvim
 
 # disable less history
 export LESSHISTFILE=-
 
-source "${ZDOTDIR}/.zshenv.local"
+. "${ZDOTDIR}/.zshenv.local"

@@ -16,9 +16,8 @@ fi
 alias c='clear'
 alias pd='popd'
 alias sudo='sudo '
-alias em='emacs -nw'
+alias vim='nvim'
 
-# emacs keybind
 bindkey -e
 
 pbcopy-as-kill-line() {
@@ -42,19 +41,19 @@ bindkey '^Y' pbpaste-as-yank
 
 show-buffers()
 {
-    local nl=$'\n' kr
-    typeset -T kr KR ' '
-    typeset +g -a buffers
-    KR=($killring)
-    buffers+="      Pre: ${PREBUFFER:-$nl}"
-    buffers+="  Buffer: $BUFFER$nl"
-    buffers+="     Cut: $CUTBUFFER$nl"
-    buffers+="       L: $LBUFFER$nl"
-    buffers+="       R: $RBUFFER$nl"
-    buffers+="Killring: ( $kr )$nl"
-    zle -M "$buffers"
+  local nl=$'\n' kr
+  typeset -T kr KR ' '
+  typeset +g -a buffers
+  KR=($killring)
+  buffers+="      Pre: ${PREBUFFER:-$nl}"
+  buffers+="  Buffer: $BUFFER$nl"
+  buffers+="     Cut: $CUTBUFFER$nl"
+  buffers+="       L: $LBUFFER$nl"
+  buffers+="       R: $RBUFFER$nl"
+  buffers+="Killring: ( $kr )$nl"
+  zle -M "$buffers"
 }
 zle -N show-buffers
 bindkey "^[o" show-buffers
 
-source "${ZDOTDIR}/.zprofile.local"
+. "${ZDOTDIR}/.zprofile.local"
