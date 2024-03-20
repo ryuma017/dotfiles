@@ -26,6 +26,7 @@ info() {
 
 error() {
   printf "$(_setaf 1)$(_bold)%8s$(_reset): %s\n" "error" "$1" >&2
+  exit 1
 }
 
 # commands checked by this function may be pre-installed
@@ -127,3 +128,5 @@ ensure brew bundle --file="${DOTFILES_HOME}/Brewfile" install
 # symlinking config files
 info "stowing config files into ${XDG_CONFIG_HOME}"
 ensure make --file "${DOTFILES_HOME}/Makefile" all
+
+info "all installations are completed successfully"
