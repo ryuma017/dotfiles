@@ -1,0 +1,8 @@
+bat
+delta
+exa
+fd-find
+hyperfine
+ripgrep
+starship
+xsv

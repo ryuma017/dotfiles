@@ -1,3 +1,7 @@
+if [ -z "$TMUX" ] && command -v tmux > /dev/null 2>&1; then
+  exec tmux new -As "stuff"
+fi
+
 if command -v brew > /dev/null 2>&1; then
   # completion
   [ -d "${HOMEBREW_PREFIX}/share/zsh-completions" ] && \
@@ -12,8 +16,7 @@ if command -v brew > /dev/null 2>&1; then
   # syntax highlighting
   zle_highlight=( region:fg=#adbac7,bg=#264f78 )
   if [ -r "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
-    # define custom styles
-    # ref: https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
+    # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
     . "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
     typeset -A ZSH_HIGHLIGHT_STYLES
 
@@ -40,44 +43,54 @@ if command -v brew > /dev/null 2>&1; then
     ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=green'
     ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='none'
     ZSH_HIGHLIGHT_STYLES[back-dollar-quoted-argument]='none'
-    ZSH_HIGHLIGHT_STYLES[assign]='none'
-    ZSH_HIGHLIGHT_STYLES[redirection]='fg=red'
+    ZSH_HIGHLIGHT_STYLES[assign]='fg=cyan'
+    ZSH_HIGHLIGHT_STYLES[redirection]='fg=cyan'
     ZSH_HIGHLIGHT_STYLES[comment]='fg=black,bold'
-    ZSH_HIGHLIGHT_STYLES[named-fd]='fg=red'
-    ZSH_HIGHLIGHT_STYLES[numeric-fd]='fg=red'
+    ZSH_HIGHLIGHT_STYLES[named-fd]='fg=cyan'
+    ZSH_HIGHLIGHT_STYLES[numeric-fd]='fg=cyan'
     ZSH_HIGHLIGHT_STYLES[arg0]='bold'
 
     # brackets
-    # ZSH_HIGHLIGHT_HIGHLIGHTERS+=( brackets )
-    # ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=#6cb6ff'
-    # ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=#6bc46d'
-    # ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=#daaa3f'
-    # ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=#ff938a'
-    # ZSH_HIGHLIGHT_STYLES[bracket-level-5]='fg=#fc8dc7'
-    # ZSH_HIGHLIGHT_STYLES[bracket-level-6]='fg=#dcbdfb'
+    #ZSH_HIGHLIGHT_HIGHLIGHTERS+=( brackets )
+    #ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=#6cb6ff'
+    #ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=#6bc46d'
+    #ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=#daaa3f'
+    #ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=#ff938a'
+    #ZSH_HIGHLIGHT_STYLES[bracket-level-5]='fg=#fc8dc7'
+    #ZSH_HIGHLIGHT_STYLES[bracket-level-6]='fg=#dcbdfb'
   fi
 fi
 
 # history
 [ -d "${XDG_STATE_HOME}/zsh" ] || mkdir -p "${XDG_STATE_HOME}/zsh"
 HISTFILE="${XDG_STATE_HOME}/zsh/history"
-HISTSIZE=1000000
-SAVEHIST=1000000
+HISTSIZE=10000000
+SAVEHIST=10000000
+
+# set the built-in time format to be more like bash
+TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S\nmaxmem\t%M MB\nfaults\t%F'
 
 # prompt
 if command -v starship > /dev/null 2>&1; then eval "$(starship init zsh)"; fi
 
 # options
+setopt append_history
 setopt auto_cd
 setopt auto_pushd
+setopt complete_in_word
 setopt pushd_ignore_dups
 setopt extended_history
 setopt hist_ignore_dups
 setopt hist_ignore_space
 setopt hist_no_store
+setopt hist_reduce_blanks
 setopt inc_append_history
+setopt notify
 setopt share_history
+setopt sh_word_split
+
 unsetopt flow_control
 unsetopt list_beep
+unsetopt no_match
 
 . "${ZDOTDIR}/.zshrc.local"

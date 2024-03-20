@@ -18,7 +18,7 @@
 [alias]
 	st = status
 	co = checkout
-	amend = commit -a --amend -C HEAD
+	amend = commit --amend -C HEAD
 	logo = log --oneline
 	logp = log --stat --decorate=short --pretty=format:'%C(yellow)%h %Cgreen%cr %Cblue%cn%Cred%d %Creset%s %C(cyan)%b'
 	sync = !git checkout main && git pull origin main && git fetch -p origin && git branch -d $(git branch --merged | grep -v main | grep -v '*')

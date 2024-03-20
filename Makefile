@@ -2,11 +2,6 @@ XDG_CONFIG_HOME ?= $(HOME)/.config
 DOTFILES_HOME ?= $(HOME)/.dotfiles
 DOTFILES_CONFIG_HOME := $(DOTFILES_HOME)/.config
 
-test:
-	@echo $(XDG_CONFIG_HOME)
-	@echo $(DOTFILES_HOME)
-	@echo $(DOTFILES_CONFIG_HOME)
-
 .DEFAULT_GOAL := all
 
 .PHONY: alacritty git hammerspoon karabiner starship tmux zsh

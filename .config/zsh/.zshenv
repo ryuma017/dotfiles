@@ -11,13 +11,25 @@ export XDG_STATE_HOME="$HOME/.local/state" # user-specific state files (log, his
 typeset -U path fpath PATH FPATH
 
 # obtain default PATH and MANPATH from /etc/{paths,manpaths,paths.d/*,manpaths.d/*}
-if [ -x /usr/libexec/path_helper ]; then
-  eval "$(/usr/libexec/path_helper -s)"
-fi
+#if [ -x /usr/libexec/path_helper ]; then
+#  eval "$(/usr/libexec/path_helper -s)"
+#if
 
 # homebrew
 if [ -x /opt/homebrew/bin/brew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
+  for bin in "${HOMEBREW_PREFIX}/opt/"*"/libexec/gnubin"; do
+    export PATH=$bin:$PATH
+  done
+  #for bin in "${HOMEBREW_PREFIX}/opt/"*"/bin"; do
+  #  export PATH=$bin:$PATH
+  #done
+  for man in "${HOMEBREW_PREFIX}/opt/"*"/libexec/gnuman"; do
+    export MANPATH=$man:$MANPATH
+  done
+  #for man in "${HOMEBREW_PREFIX}/opt/"*"/share/man/man1"; do
+  #  export MANPATH=$man:$MANPATH
+  #done
 fi
 
 if [ -d "${ZDOTDIR}/.zshenv.d" ]; then
@@ -26,6 +38,10 @@ if [ -d "${ZDOTDIR}/.zshenv.d" ]; then
       . "$env"
     fi
   done
+fi
+
+if [ -d "$HOME/.local/bin" ]; then
+  export PATH="$HOME/.local/bin:$PATH"
 fi
 
 # terminfo

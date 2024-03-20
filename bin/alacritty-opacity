@@ -1,0 +1,13 @@
+#!/bin/sh
+
+term_conf_file="$XDG_CONFIG_HOME/alacritty/alacritty.yml"
+value="$1"
+
+if [ -z "$value" ] || [[ ! "$value" =~ ^[0-1]\.[0-9]+$ ]]; then
+  echo "Usage: $(basename $0) <value>" >&2
+  echo "value must be a floating point number from \`0.0\` to \`1.0\`" >&2
+  exit 1
+fi
+
+# Note: We need GNU sed. BSD version does not support the `--follow-symlinks` option.
+sed --follow-symlinks -i -e "s/^  opacity: .*$/  opacity: $value/g" "$term_conf_file"

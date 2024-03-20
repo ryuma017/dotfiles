@@ -1,145 +1,131 @@
 #!/bin/sh
+# shellcheck disable=SC3043
 
 set -u
 
-# fail fast if we're not in a directory that exists
-if ! [[ -d "${PWD}" ]]; then
-    error "the current working directory does not exist"
-fi
-
-# fail fast if HOME is not set
-if [[ -z "${HOME:-}" ]]; then
+# Fail fast if HOME is not set.
+if [ -z "${HOME:-}" ]; then
     error "HOME is unset"
 fi
 
-DOTFILES_REMOTE_URL="https://github.com/ryuma017/dotfiles"
-DOTFILES_HOME="${DOTFILES_HOME:-$HOME/.dotfiles}"
-
-XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
-XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
-XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
-XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
-
-main() {
-    # create XDG Base Directory specification directories
-    msg "Creating" "XDG Base Directory specification directories" green
-    ensure mkdir -p \
-        "${XDG_CONFIG_HOME}" \
-        "${XDG_CACHE_HOME}"  \
-        "${XDG_DATA_HOME}"   \
-        "${XDG_STATE_HOME}"
-
-    # install homebrew if it does not exist
-    if ! check_cmd brew; then
-        msg "Installing" "homebrew" green
-        trace ensure install_homebrew
-    fi
-
-    # clone or update dotfiles
-    msg "Fetching" "ryuma017/dotfiles" green
-    trace ensure clone_or_update_dotfiles_via_git
-
-    # install all the necessary packages
-    msg "Installing" "packages via homebrew" green
-    trace ensure brew bundle --file="${DOTFILES_HOME}/Brewfile" install
-
-    # stow config files
-    msg "Stowing" "config files into ${XDG_CONFIG_HOME}" green
-    trace ensure stow_all_configs
-}
-
-install_homebrew() {
-    require_cmd curl
-    require_cmd /bin/bash
-
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-}
-
-clone_or_update_dotfiles_via_git() {
-    require_cmd git
-
-    if [ -d "${DOTFILES_HOME}/.git" ]; then
-        git -C "${DOTFILES_HOME}" pull --ff-only
-    else
-        git clone "${DOTFILES_REMOTE_URL}" "${DOTFILES_HOME}"
-    fi
-}
-
-stow_all_configs() {
-    export DOTFILES_HOME XDG_CONFIG_HOME
-    make --file "${DOTFILES_HOME}/Makefile" all
-}
-
-### utility functions ###
-
-# commands checked by this function may be pre-installed
-require_cmd() {
-    if ! check_cmd "$1"; then
-        error "$1 is required (command not found)"
-    fi
-}
-
-check_cmd() {
-    command -v "$1" > /dev/null 2>&1
-}
-
-ensure() {
-    if ! "$@"; then
-        error "command failed: $*";
-    fi
-}
-
-trace() {
-    local -i st
-    "$@" 2>&1 | while read -r line; do
-        printf "$(_setaf gray)%s$(_reset)\n" "$line"
-    done
-    st="${PIPESTATUS[0]}"
-    if [ $st -ne 0 ] && [ "$1" = ensure ]; then
-        exit 1
-    fi
-    if [ $st -ne 0 ]; then
-        echo "return 1: ${PIPESTATUS[0]}"
-        return 1
-    fi
-}
-
-msg() {
-    local status="$1"
-    local msg="$2"
-    local color="$3"
-
-    printf "$(_setaf "$color")$(_bold)%12s$(_reset) %s\n" "$status" "$msg"
-}
-
-error() {
-    printf "$(_setaf red)$(_bold)error$(_reset): %s\n" "$1" >&2
-    exit 1
-}
-
 _reset() {
-    tput sgr0 2> /dev/null || printf "" # printf "\x1B[0m"
+  tput sgr0 2> /dev/null || printf "" # printf "\x1B[0m"
 }
 
 _bold() {
-    tput bold 2> /dev/null || printf "" # printf "\x1B[1m"
+  tput bold 2> /dev/null || printf "" # printf "\x1B[1m"
 }
 
 _setaf() {
-    case "$1" in
-        gray)
-            tput setaf 0 2> /dev/null || printf "" # printf "\x1B[30m"
-            ;;
-        red)
-            tput setaf 1 2> /dev/null || printf "" # printf "\x1B[31m"
-            ;;
-        green)
-            tput setaf 2 2> /dev/null || printf "" # printf "\x1B[32m"
-            ;;
-        *)
-            ;;
-    esac
+  tput setaf "$1" 2> /dev/null || printf ""
 }
 
-main "$@" || exit 1
+info() {
+  printf "$(_setaf 6)$(_bold)%8s$(_reset): %s\n" "info" "$1"
+}
+
+error() {
+  printf "$(_setaf 1)$(_bold)%8s$(_reset): %s\n" "error" "$1" >&2
+}
+
+# commands checked by this function may be pre-installed
+requires() {
+  if ! cmd_exists "$1"; then
+    error "$1 is required (command not found)"
+  fi
+}
+
+cmd_exists() {
+  command -v "$1" > /dev/null 2>&1
+}
+
+ensure() {
+  if ! "$@"; then
+    error "command failed: $*";
+  fi
+}
+
+export DOTFILES_HOME="${DOTFILES_HOME:-$HOME/.dotfiles}"
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
+
+requires /bin/bash
+requires curl
+requires git
+requires make
+
+info "creating XDG directories"
+ensure mkdir -p \
+  "${XDG_CONFIG_HOME}" \
+  "${XDG_CACHE_HOME}"  \
+  "${XDG_DATA_HOME}"   \
+  "${XDG_STATE_HOME}"
+
+if [ ! -d "${DOTFILES_HOME}/.git" ]; then
+  info "cloning dotfiles"
+  ensure git clone https://github.com/ryuma017/dotfiles "${DOTFILES_HOME}"
+else
+  info "ryuma017/dotfiles is already exists"
+  info "updating dotfiles"
+  ensure git -C "${DOTFILES_HOME}" pull --ff-only
+fi
+
+for bin in "${DOTFILES_HOME}/bin"/*; do
+  if [ -x "$bin" ]; then
+    info "symlinking ${bin} to ${HOME}/.local/bin"
+    ln -sf "$bin" "${HOME}/.local/bin/$(basename "$bin")"
+  fi
+done
+
+# Rust
+
+if [ ! -d "${RUSTUP_HOME:-$HOME/.rustup}" ]; then
+  info "installing rustup"
+  ensure curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+else
+  info "rustup is already installed"
+fi
+
+. "${CARGO_HOME:-$HOME/.cargo}"/env
+
+if ! cmd_exists cargo-binstall; then
+  info "installing cargo-binstall"
+  ensure curl -L --proto '=https' --tlsv1.2 -sSf \
+    https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
+else
+  info "cargo-binstall is already installed"
+fi
+
+while IFS= read -r name; do
+  if [ -n "$name" ]; then
+    info "installing Rust binaries: $name"
+    ensure cargo binstall "$name"
+  fi
+done < "${DOTFILES_HOME}/cargo-install.txt"
+
+# Homebrew
+
+local brew_bin
+if [ "$(uname -m)" = "arm64" ]; then
+  brew_bin="/opt/homebrew/bin/brew"
+else
+  brew_bin="/usr/local/bin/brew"
+fi
+
+if [ ! -x "${brew_bin}" ]; then
+  info "installing homebrew"
+  ensure /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+else
+  info "homebrew is already installed"
+fi
+
+eval "$(${brew_bin} shellenv)"
+
+info "installing packages via homebrew"
+ensure brew bundle --file="${DOTFILES_HOME}/Brewfile" install
+
+# symlinking config files
+info "stowing config files into ${XDG_CONFIG_HOME}"
+ensure make --file "${DOTFILES_HOME}/Makefile" all

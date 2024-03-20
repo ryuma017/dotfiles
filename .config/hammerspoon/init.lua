@@ -31,7 +31,7 @@ local hotkeys = {
     end),
     -- launch/focus/hide Emacs
     hotkey.new({"cmd", "ctrl"}, "k", function()
-        local name = "Emacs"
+        local name = "Code"
         local app = application.find(name)
         if app == nil then
             application.launchOrFocus(name)

@@ -1,9 +1,8 @@
-# aliases
 if command -v exa > /dev/null 2>&1; then
   alias ls='exa --git'
-  alias l='clear && ls'
   alias la='exa -a --git'
-  alias ll='exa -aahl --git'
+  alias ll='exa -hl --git'
+  alias lla='exa -aahl --git'
   alias lt='exa -T -L 3 -a -I "node_modules|.git|.cache"'
   alias lta='exa -T -a -I "node_modules|.git|.cache" --color=always | less -r'
 else

@@ -4,7 +4,7 @@ $git_branch$git_commit$git_state$git_status\
 $character
 """
 right_format = """\
-$cmd_duration$battery$rust$zig\
+$cmd_duration$battery\
 """
 add_newline = false
 
@@ -24,11 +24,11 @@ show_always = true
 [directory]
 truncation_length = 3
 truncate_to_repo = true
-format = "[:](fg:white dimmed)[$path]($style)"
+format = "[::](fg:white dimmed)[$path]($style)"
 style = "fg:blue"
 truncation_symbol = "…/"
 repo_root_style = "fg:blue"
-repo_root_format = "[:](fg:white dimmed)[$repo_root]($repo_root_style)[$path]($style)"
+repo_root_format = "[::](fg:white dimmed)[$repo_root]($repo_root_style)[$path]($style)"
 
 [character]
 format = " $symbol "
