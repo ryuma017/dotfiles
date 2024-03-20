@@ -1,8 +1,8 @@
 bat
-delta
 exa
 fd-find
 ghr
+git-delta
 hyperfine
 oha
 ripgrep

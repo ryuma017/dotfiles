@@ -74,8 +74,8 @@ fi
 
 for bin in "${DOTFILES_HOME}/bin"/*; do
   if [ -x "$bin" ]; then
-    info "symlinking ${bin} to ${HOME}/.local/bin"
-    ln -sf "$bin" "${HOME}/.local/bin/$(basename "$bin")"
+    info "symlinking ${bin} to ${HOME}/.local/bin/$(basename "$bin")"
+    ensure ln -sf "$bin" "${HOME}/.local/bin/$(basename "$bin")"
   fi
 done
 
@@ -100,17 +100,15 @@ fi
 
 while IFS= read -r name; do
   if [ -n "$name" ]; then
-    info "installing Rust binaries: $name"
-    ensure cargo binstall "$name"
+    info "installing Rust binary: $name"
+    ensure cargo binstall -yq "$name"
   fi
 done < "${DOTFILES_HOME}/cargo-install.txt"
 
 # Homebrew
 
-local brew_bin
-if [ "$(uname -m)" = "arm64" ]; then
-  brew_bin="/opt/homebrew/bin/brew"
-else
+brew_bin="/opt/homebrew/bin/brew"
+if [ ! "$(uname -m)" = "arm64" ]; then
   brew_bin="/usr/local/bin/brew"
 fi
 

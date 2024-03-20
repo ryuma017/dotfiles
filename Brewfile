@@ -1,8 +1,6 @@
 tap "homebrew/bundle"
-tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
-tap "homebrew/core"
 
 cask_args appdir: "/Applications", fontdir: "${HOME}/Library/Fonts"
 
@@ -37,17 +35,13 @@ brew "make"
 brew "zsh"
 
 # Other programs
-brew "bat"
 brew "curl"
-brew "exa"
 brew "git"
 brew "grpcurl"
 brew "htop"
-brew "hyperfine"
 brew "libpq", link: true
 brew "mold"
-brew "openssl@3"
-brew "starship"
+brew "openssl"
 brew "telnet"
 brew "tmux"
 brew "zsh"
