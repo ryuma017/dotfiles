@@ -2,7 +2,15 @@ bat
 delta
 exa
 fd-find
+ghr
 hyperfine
+oha
 ripgrep
 starship
 xsv
+
+cargo-expand
+cargo-fuzz
+cargo-make
+cargo-play
+cargo-watch
