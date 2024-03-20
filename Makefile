@@ -8,7 +8,7 @@ DOTFILES_CONFIG_HOME := $(DOTFILES_HOME)/.config
 
 alacritty:
 	mkdir -p $(XDG_CONFIG_HOME)/alacritty
-	ln -sf $(DOTFILES_CONFIG_HOME)/alacritty/alacritty.yml $(XDG_CONFIG_HOME)/alacritty/alacritty.yml
+	ln -sf $(DOTFILES_CONFIG_HOME)/alacritty/alacritty.toml $(XDG_CONFIG_HOME)/alacritty/alacritty.toml
 
 git:
 	mkdir -p $(XDG_CONFIG_HOME)/git
