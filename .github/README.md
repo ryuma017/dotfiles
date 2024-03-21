@@ -13,17 +13,14 @@
 ## Usage
 
 ```
-$ git clone https://github.com/ryuma017/dotfiles.git
-$ cd dotfiles
-$ make
+$ curl -fsSL https://raw.githubusercontent.com/ryuma017/dotfiles/main/install.sh | sh
 ```
 
-**⚠️ Worning**
+[!WARNING]
 
-This `make` command overwrites these files in `$HOME` on your machine;
+This command overwrites these files in `$HOME` on your machine;
 
 - `.zshenv`
-- `.config/**` (check [`.config/`](.config/) in this repository)
+- configuration files in `$XDG_CONFIG_HOME` that maintained by this repository (see [`.config/`](.config/) or [`Makefile`](Makefile) for details)
 
-and also run `brew bundle` in its process.
-Back up these files before running `make` if you need.
+Back up these files before installation if you want to keep them.
