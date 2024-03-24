@@ -1,15 +1,13 @@
-if cmd-exists exa; then
-  alias ls='exa --git'
-  alias la='exa -a --git'
-  alias ll='exa -hl --git'
-  alias lla='exa -aahl --git'
-  alias lt='exa -T -L 3 -a -I "node_modules|.git|.cache"'
-  alias lta='exa -T -a -I "node_modules|.git|.cache" --color=always | less -r'
+if cmd-exists eza; then
+  alias ls='eza --git'
+  alias la='eza -a --git'
+  alias ll='eza -hl --git'
+  alias lla='eza -ahl --git'
 else
   alias ls='ls --color=auto'
-  alias l='clear && ls'
   alias la='ls -a'
-  alias ll='ls -ahl'
+  alias ll='ls -hl'
+  alias lla='ls -ahl'
 fi
 
 alias c='clear'
