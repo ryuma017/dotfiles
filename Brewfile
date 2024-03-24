@@ -36,6 +36,7 @@ brew "zsh"
 
 # Other programs
 brew "curl"
+brew "fzf"
 brew "git"
 brew "grpcurl"
 brew "htop"

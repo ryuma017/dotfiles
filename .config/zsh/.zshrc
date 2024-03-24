@@ -26,6 +26,11 @@ if cmd-exists starship; then
   eval "$(starship init zsh)"
 fi
 
+# fzf integration
+if cmd-exists fzf; then
+  eval "$(fzf --zsh | sed 's/\^T/\^X/g')"
+fi
+
 # history
 [ -d "${XDG_STATE_HOME}/zsh" ] || mkdir -p "${XDG_STATE_HOME}/zsh"
 HISTFILE="${XDG_STATE_HOME}/zsh/history"

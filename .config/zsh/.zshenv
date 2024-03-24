@@ -75,7 +75,18 @@ if cmd-exists starship; then
 fi
 
 if cmd-exists bat; then
-  export BAT_THEME="base16"
+  export BAT_THEME="ansi"
 fi
 
-# [ -r "${ZDOTDIR}/.zshenv.local" ] && . "${ZDOTDIR}/.zshenv.local"
+if cmd-exists fzf; then
+  export FZF_DEFAULT_COMMAND="rg --files"
+  export FZF_DEFAULT_OPTS="
+    --color='dark,gutter:-1,pointer:red'
+    --preview='bat --style='changes,numbers' --color always {}'
+    --multi
+    --height=40%
+    --border
+  "
+fi
+
+[ -r "${ZDOTDIR}/.zshenv.local" ] && . "${ZDOTDIR}/.zshenv.local"
