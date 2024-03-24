@@ -1,4 +1,4 @@
-if command -v exa > /dev/null 2>&1; then
+if cmd-exists exa; then
   alias ls='exa --git'
   alias la='exa -a --git'
   alias ll='exa -hl --git'
@@ -55,4 +55,4 @@ show-buffers()
 zle -N show-buffers
 bindkey "^[o" show-buffers
 
-. "${ZDOTDIR}/.zprofile.local"
+[ -r "${ZDOTDIR}/.zprofile.local" ] && . "${ZDOTDIR}/.zprofile.local"

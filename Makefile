@@ -50,6 +50,4 @@ zsh:
 		touch $(XDG_CONFIG_HOME)/zsh/.zshrc.local; \
 	fi
 
-	ln -sfn $(DOTFILES_CONFIG_HOME)/zsh/.zshenv.d $(XDG_CONFIG_HOME)/zsh/.zshenv.d
-
 all: alacritty git hammerspoon karabiner starship tmux zsh
