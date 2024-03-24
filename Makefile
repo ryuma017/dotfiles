@@ -41,13 +41,13 @@ zsh:
 	ln -sf $(DOTFILES_CONFIG_HOME)/zsh/.zprofile $(XDG_CONFIG_HOME)/zsh/.zprofile
 	ln -sf $(DOTFILES_CONFIG_HOME)/zsh/.zshrc $(XDG_CONFIG_HOME)/zsh/.zshrc
 	if ! [ -e $(XDG_CONFIG_HOME)/zsh/.zshenv.local ]; then \
-		cp $(DOTFILES_CONFIG_HOME)/zsh/.zshenv.local $(XDG_CONFIG_HOME)/zsh/.zshenv.local; \
+		touch $(XDG_CONFIG_HOME)/zsh/.zshenv.local; \
 	fi
 	if ! [ -e $(XDG_CONFIG_HOME)/zsh/.zprofile.local ]; then \
-		cp $(DOTFILES_CONFIG_HOME)/zsh/.zprofile.local $(XDG_CONFIG_HOME)/zsh/.zprofile.local;\
+		touch $(XDG_CONFIG_HOME)/zsh/.zprofile.local;\
 	fi
 	if ! [ -e $(XDG_CONFIG_HOME)/zsh/.zshrc.local ]; then \
-		cp $(DOTFILES_CONFIG_HOME)/zsh/.zshrc.local $(XDG_CONFIG_HOME)/zsh/.zshrc.local; \
+		touch $(XDG_CONFIG_HOME)/zsh/.zshrc.local; \
 	fi
 
 	ln -sfn $(DOTFILES_CONFIG_HOME)/zsh/.zshenv.d $(XDG_CONFIG_HOME)/zsh/.zshenv.d
