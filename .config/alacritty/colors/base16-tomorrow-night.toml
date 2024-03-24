@@ -1,0 +1,32 @@
+# Snippet from https://github.com/aarowill/base16-alacritty/blob/c9e824811eed70d7cdb1b31614b81c2f82bf16f8/colors/base16-tomorrow-night.toml
+
+[colors]
+draw_bold_text_with_bright_colors = false
+
+[colors.primary]
+background = '0x1d1f21'
+foreground = '0xc5c8c6'
+
+[colors.cursor]
+text = '0x1d1f21'
+cursor = '0xc5c8c6'
+
+[colors.normal]
+black = '0x1d1f21' # background
+red = '0xcc6666'
+green = '0xb5bd68'
+yellow = '0xf0c674'
+blue = '0x81a2be'
+magenta = '0xb294bb' # purple
+cyan = '0x8abeb7' # aqua
+white = '0xc5c8c6' # foreground
+
+[colors.bright]
+black = '0x969896' # comment
+red = '0xde935f' # orange
+green = '0x282a2e' # line
+yellow = '0x373b41' # selection
+blue = '0xb4b7b4'
+magenta = '0xe0e0e0'
+cyan = '0xa3685a'
+white = '0xffffff'

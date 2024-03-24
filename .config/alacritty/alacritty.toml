@@ -1,54 +1,6 @@
-[[colors.indexed_colors]]
-color = "0xf99157"
-index = 16
-
-[[colors.indexed_colors]]
-color = "0xa3685a"
-index = 17
-
-[[colors.indexed_colors]]
-color = "0x393939"
-index = 18
-
-[[colors.indexed_colors]]
-color = "0x515151"
-index = 19
-
-[[colors.indexed_colors]]
-color = "0xb4b7b4"
-index = 20
-
-[[colors.indexed_colors]]
-color = "0xe0e0e0"
-index = 21
-
-[colors.bright]
-black = "0x999999"
-blue = "0x6699cc"
-cyan = "0x66cccc"
-green = "0x99cc99"
-magenta = "0xcc99cc"
-red = "0xf2777a"
-white = "0xffffff"
-yellow = "0xffcc66"
-
-[colors.cursor]
-cursor = "0x6699cc"
-text = "CellForeground"
-
-[colors.normal]
-black = "0x2d2d2d"
-blue = "0x6699cc"
-cyan = "0x66cccc"
-green = "0x99cc99"
-magenta = "0xcc99cc"
-red = "0xf2777a"
-white = "0xcccccc"
-yellow = "0xffcc66"
-
-[colors.primary]
-background = "0x2d2d2d"
-foreground = "0xcccccc"
+import = [
+  "~/.config/alacritty/colors/base16-tomorrow-night.toml",
+]
 
 [font]
 size = 14.0
@@ -78,10 +30,6 @@ mods = "Command"
 history = 0
 
 [window]
-decorations = "buttonless"
+decorations = "none"
 opacity = 0.9
 option_as_alt = "Both"
-
-[window.padding]
-x = 4
-y = 4

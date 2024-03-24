@@ -14,7 +14,7 @@ if command -v brew > /dev/null 2>&1; then
   zstyle ":completion:*:default" menu select=1
 
   # syntax highlighting
-  zle_highlight=( region:fg=#adbac7,bg=#264f78 )
+  zle_highlight=( region:bg=11 )
   if [ -r "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
     # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
     . "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"

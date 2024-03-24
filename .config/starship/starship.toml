@@ -1,65 +1,50 @@
 format = """
-$jobs$hostname$username$directory\
-$git_branch$git_commit$git_state$git_status\
+$jobs$time$hostname$username$directory\
+[( \\($git_branch$git_commit$git_state$git_status\\))](fg:cyan)\
 $character
 """
-right_format = """\
-$cmd_duration$battery\
-"""
+right_format = "$cmd_duration"
 add_newline = false
 
 [hostname]
 ssh_only = true
-ssh_symbol = ""
-trim_at = ""
-format = "[$ssh_symbol ${hostname}@]($style)"
-style = "bold fg:white bg:black"
+trim_at = "."
+style = "fg:bright-black"
+format = "[$hostname@]($style)"
 
 [username]
-style_root = "bold fg:red bg:black"
-style_user = "fg:white"
+style_root = "fg:red bold"
+style_user = "fg:blue"
 format = "[$user]($style)"
 show_always = true
 
 [directory]
 truncation_length = 3
 truncate_to_repo = true
-format = "[::](fg:white dimmed)[$path]($style)"
-style = "fg:blue"
+format = "[::](fg:bright-black)[$path]($style)"
+style = "fg:cyan"
 truncation_symbol = "…/"
-repo_root_style = "fg:blue"
-repo_root_format = "[::](fg:white dimmed)[$repo_root]($repo_root_style)[$path]($style)"
+repo_root_style = "fg:cyan"
+repo_root_format = "[::](fg:bright-black)[$repo_root]($repo_root_style)[$path]($style)"
 
 [character]
 format = " $symbol "
 success_symbol = "[|](fg:red)"
-error_symbol = "[|](italic fg:red)"
+error_symbol = "[|](fg:red italic)"
 
 [cmd_duration]
 min_time = 1_000
 format = "[\\($duration\\)]($style)"
-style = "dimmed fg:white"
-
-[battery]
-format = "[\\(](dimmed fg:white)[$symbol$percentage]($style)[\\)](dimmed fg:white)"
-
-[[battery.display]]
-style = "bold dimmed fg:red"
+style = "bright-black"
 
 [git_branch]
-format = "[::](fg:white dimmed)[$branch]($style)"
-style = "fg:bright-blue"
+format = "$branch"
 
 [git_status]
-format = "( [$all_status$ahead_behind]($style))"
-style = "fg:bright-blue"
+format = "( $all_status$ahead_behind)"
 
-[rust]
-format = " [$symbol]($style)"
-symbol = ""
-style = "fg:#f74c01"
-
-[zig]
-format = " [$symbol]($style)"
-symbol = "↯"
-style = "fg:#f7a41e"
+[time]
+disabled = false
+time_format = "%R"
+style = "fg:bright-black"
+format = "[\\[$time\\]]($style) "
