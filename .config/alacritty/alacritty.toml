@@ -1,5 +1,5 @@
 import = [
-  "~/.config/alacritty/colors/base16-tomorrow-night.toml",
+  "~/.config/alacritty/colors/base16-gruvbox-dark-hard.toml",
 ]
 
 [font]

@@ -1,4 +1,4 @@
-# Snippet from https://github.com/aarowill/base16-alacritty/blob/c9e824811eed70d7cdb1b31614b81c2f82bf16f8/colors/base16-tomorrow-night.toml
+# Base16 Tomorrow Night scheme
 
 [colors]
 draw_bold_text_with_bright_colors = false
