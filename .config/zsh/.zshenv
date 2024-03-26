@@ -75,7 +75,7 @@ if cmd-exists starship; then
 fi
 
 if cmd-exists bat; then
-  export BAT_THEME="ansi"
+  export BAT_THEME="base16"
 fi
 
 if cmd-exists fzf; then
