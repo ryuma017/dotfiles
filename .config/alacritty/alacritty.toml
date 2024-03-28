@@ -4,9 +4,10 @@ import = [
 
 [font]
 size = 14.0
-
-[font.normal]
-family = "Hack Nerd Font"
+normal = { family = "Iosevka Term SS09", style = "Extended" }
+bold = { family = "Iosevka Term SS09", style = "Bold Extended" }
+italic = { family = "Iosevka Term SS09", style = "Extended Italic" }
+bold_italic = { family = "Iosevka Term SS09", style = "Bold Extended Italic" }
 
 [[keyboard.bindings]]
 action = "ReceiveChar"

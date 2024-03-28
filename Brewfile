@@ -9,7 +9,7 @@ cask "alacritty"
 cask "deepl"
 cask "docker"
 cask "firefox-developer-edition"
-cask "font-hack-nerd-font"
+cask "font-iosevka-ss09"
 cask "hammerspoon"
 cask "karabiner-elements"
 
