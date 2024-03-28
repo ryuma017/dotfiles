@@ -30,7 +30,7 @@ repo_root_format = "[::](fg:bright-black)[$repo_root]($repo_root_style)[$path]($
 [character]
 format = " $symbol "
 success_symbol = "[|](fg:red)"
-error_symbol = "[|](fg:red italic)"
+error_symbol = "[¦](fg:red)"
 
 [cmd_duration]
 min_time = 1_000
