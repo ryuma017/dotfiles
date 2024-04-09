@@ -79,13 +79,12 @@ if cmd-exists bat; then
 fi
 
 if cmd-exists fzf; then
-  export FZF_DEFAULT_COMMAND="rg --files"
+  export FZF_DEFAULT_COMMAND="fd --type file --follow"
   export FZF_DEFAULT_OPTS="
     --color='dark,gutter:-1,pointer:red'
-    --preview='bat --style='changes,numbers' --color always {}'
     --multi
     --height=40%
-    --border
+    --border='sharp'
   "
 fi
 
