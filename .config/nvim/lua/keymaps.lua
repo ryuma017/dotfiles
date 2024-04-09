@@ -10,7 +10,7 @@ local map = vim.keymap.set
   "s"   -   Select
   "x"   -   Visual
   "o"   -   Operator-pending
-  "m"   -   Insert and Command-line
+  "!"   -   Insert and Command-line
   "i"   -   Insert
   "l"   -   Insert, Command-line, Lang-Arg
   "c"   -   Command-line

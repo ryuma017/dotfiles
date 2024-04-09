@@ -229,18 +229,28 @@ return {
         winblend = 10,
       })
 
+      local select_next_item = {
+        i = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+        c = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+      }
+
+      local select_prev_item = {
+        i = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+        c = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+      }
+
       cmp.setup({
-        mapping = cmp.mapping.preset.insert({
-          ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-          ["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-          ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-          ["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-          ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        mapping = {
+          ["<C-n>"] = select_next_item,
+          ["<C-p>"] = select_prev_item,
+          ["<C-j>"] = select_next_item,
+          ["<C-k>"] = select_prev_item,
+          ["<C-b>"] = { i = cmp.mapping.scroll_docs(-4) },
+          ["<C-f>"] = { i = cmp.mapping.scroll_docs(4) },
           ['<C-l>'] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping.abort(),
           ["<cr>"] = cmp.mapping.confirm({ select = false }),
-        }),
+        },
         sources = cmp.config.sources({
           { name = "copilot" },
           { name = "nvim_lsp" },
@@ -253,13 +263,12 @@ return {
           documentation = window_opts,
         },
         experimental = {
-          ghost_text = false,
+          ghost_text = true,
         },
       })
 
       -- use buffer source for `/` and `?`
       cmp.setup.cmdline({ "/", "?" }, {
-        mapping = cmp.mapping.preset.cmdline(),
         sources = {
           { name = "buffer" }
         }
@@ -267,7 +276,6 @@ return {
 
       -- use cmdline & path source for ':'
       cmp.setup.cmdline(':', {
-        mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
           { name = 'path' }
         }, {
