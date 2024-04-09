@@ -34,7 +34,8 @@ brew "bison"
 brew "make"
 brew "zsh"
 
-# Other programs
+# other programs
+brew "bash-language-server"
 brew "curl"
 brew "fzf"
 brew "git"
@@ -42,7 +43,9 @@ brew "grpcurl"
 brew "htop"
 brew "libpq", link: true
 brew "mold"
+brew "nvim"
 brew "openssl"
+brew "shellcheck"
 brew "telnet"
 brew "tmux"
 brew "zsh"

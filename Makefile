@@ -26,6 +26,12 @@ karabiner:
 	mkdir -p $(XDG_CONFIG_HOME)/karabiner
 	ln -sf $(DOTFILES_CONFIG_HOME)/karabiner/karabiner.json $(XDG_CONFIG_HOME)/karabiner/karabiner.json
 
+nvim:
+	mkdir -p $(XDG_CONFIG_HOME)/nvim
+	ln -sf $(DOTFILES_CONFIG_HOME)/nvim/init.lua $(XDG_CONFIG_HOME)/nvim/init.lua
+	ln -sfn $(DOTFILES_CONFIG_HOME)/nvim/lua $(XDG_CONFIG_HOME)/nvim/lua
+	ln -sf $(DOTFILES_CONFIG_HOME)/nvim/lazy-lock.json $(XDG_CONFIG_HOME)/nvim/lazy-lock.json
+
 starship:
 	mkdir -p $(XDG_CONFIG_HOME)/starship
 	ln -sf $(DOTFILES_CONFIG_HOME)/starship/starship.toml $(XDG_CONFIG_HOME)/starship/starship.toml
