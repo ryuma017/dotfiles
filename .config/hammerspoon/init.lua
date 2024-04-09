@@ -13,25 +13,9 @@ local alert    = require("hs.alert")
 -- Create hotkeys with `hs.hotkey.new` instead of `hs.hotkey.bind`.
 -- But these hotkeys will not take effect until left-cmd is pressed.
 local hotkeys = {
-    -- health check
-    hotkey.new({"cmd", "ctrl", "shift"}, "h", function()
-        alert.show("Hammerspoon is healthy!")
-    end),
     -- launch/focus/hide Alacritty
     hotkey.new({"cmd", "ctrl"}, "j", function()
-        local name = "Alacritty"
-        local app = application.find(name)
-        if app == nil then
-            application.launchOrFocus(name)
-        elseif app:isFrontmost() then
-            app:hide()
-        else
-            app:activate()
-        end
-    end),
-    -- launch/focus/hide Emacs
-    hotkey.new({"cmd", "ctrl"}, "k", function()
-        local name = "Code"
+        local name = "alacritty"
         local app = application.find(name)
         if app == nil then
             application.launchOrFocus(name)
@@ -42,8 +26,8 @@ local hotkeys = {
         end
     end),
     -- launch/focus/hide Firefox
-    hotkey.new({"cmd", "ctrl"}, "l", function()
-        local name = "Firefox"
+    hotkey.new({"cmd", "ctrl"}, "k", function()
+        local name = "firefox"
         local app = application.find(name)
         if app == nil then
             application.launchOrFocus(name)
@@ -53,7 +37,6 @@ local hotkeys = {
             app:activate()
         end
     end),
-    -- ...
 }
 
 -- This toggles the hotkeys on/off.
