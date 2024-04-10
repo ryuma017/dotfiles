@@ -1,26 +1,41 @@
 [user]
-	name = Ryuma Taguchi
-	email = tgcrym01@gmail.com
+  name = Ryuma Taguchi
+  email = tgcrym01@gmail.com
+
 [core]
-	editor = nvim
-	pager = less -R
-	ignorecase = false
+  editor = nvim
+  pager = gitdiffer
+  ignorecase = false
+
+[interactive]
+  diffFilter = gitdiffer --interactive
+
 [color]
-	ui = auto
+  ui = auto
+
 [init]
-	defaultBranch = main
+  defaultBranch = main
+
 [merge]
-	ff = false
+  ff = false
+  conflictStyle = zdiff3
+
 [pull]
-	ff = only
+  ff = only
+
 [push]
-	default = simple
+  default = simple
+
+[diff]
+  colorMoved = default
+
 [alias]
-	st = status
-	co = checkout
-	amend = commit --amend -C HEAD
-	logo = log --oneline
-	logp = log --stat --decorate=short --pretty=format:'%C(yellow)%h %Cgreen%cr %Cblue%cn%Cred%d %Creset%s %C(cyan)%b'
-	sync = !git checkout main && git pull origin main && git fetch -p origin && git branch -d $(git branch --merged | grep -v main | grep -v '*')
+  st = status
+  co = checkout
+  amend = commit --amend -C HEAD
+  logo = log --oneline
+  logp = log --stat --decorate=short --pretty=format:'%C(yellow)%h %Cgreen%cr %Cblue%cn%Cred%d %Creset%s %C(cyan)%b'
+  sync = !git checkout main && git pull origin main && git fetch -p origin && git branch -d $(git branch --merged | grep -v main | grep -v '*')
+
 [include]
-	path = config.local
+  path = config.local
