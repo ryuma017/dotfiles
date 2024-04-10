@@ -1,0 +1,33 @@
+#!/bin/sh
+
+
+usage() {
+  echo "usage: $(basename "$0") [--interactive]" >&2
+}
+
+cmd-exists delta
+
+has_delta="$?"
+
+if [ "$has_delta" -eq 0 ]; then
+  export DELTA_FEATURES="${DELTA_FEATURES:-+navigate side-by-side hyperlinks}"
+fi
+
+case "$has_delta:$1" in
+  0:)
+    exec delta
+    ;;
+  1:)
+    exec less -R
+    ;;
+  0:--interactive)
+    exec delta --color-only
+    ;;
+  1:--interactive)
+    exec cat
+    ;;
+  *)
+    usage
+    exit 1
+    ;;
+esac
