@@ -1,15 +1,20 @@
 #!/bin/bash
 
+usage() {
+  echo "Usage: $(basename "$0") <value>"
+}
+
 if ! cmd-exists alacritty; then
   echo "Alacritty is not installed" >&2
+  usage >&2
   exit 1
 fi
 
 value="$1"
 
 if [ -z "$value" ] || [[ ! "$value" =~ ^[0-1]\.[0-9]+$ ]]; then
-  echo "Usage: $(basename "$0") <value>" >&2
-  echo "value must be a floating point number from \`0.0\` to \`1.0\`" >&2
+  echo "the value must be a floating point number between 0.0 and 1.0" >&2
+  usage >&2
   exit 1
 fi
 

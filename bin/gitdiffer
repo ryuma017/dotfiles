@@ -1,8 +1,7 @@
 #!/bin/sh
 
-
 usage() {
-  echo "usage: $(basename "$0") [--interactive]" >&2
+  echo "Usage: $(basename "$0") [--interactive]"
 }
 
 cmd-exists delta
@@ -27,7 +26,7 @@ case "$has_delta:$1" in
     exec cat
     ;;
   *)
-    usage
+    usage >&2
     exit 1
     ;;
 esac

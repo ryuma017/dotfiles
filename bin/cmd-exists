@@ -1,7 +1,11 @@
 #!/bin/sh
 
+usage() {
+  echo "Usage: $(basename "$0") <command>"
+}
+
 if [ ! $# -eq 1 ]; then
-  echo "Usage: $(basename $0) <command>" >&2
+  usage >&2
 fi
 
-command -v $1 > /dev/null 2>&1
+command -v "$1" > /dev/null 2>&1
