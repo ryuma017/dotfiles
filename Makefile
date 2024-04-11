@@ -4,7 +4,7 @@ DOTFILES_CONFIG_HOME := $(DOTFILES_HOME)/.config
 
 .DEFAULT_GOAL := all
 
-.PHONY: alacritty git hammerspoon karabiner starship tmux zsh
+.PHONY: alacritty git hammerspoon karabiner nvim starship tmux yabai zsh all
 
 alacritty:
 	mkdir -p $(XDG_CONFIG_HOME)/alacritty
@@ -40,6 +40,10 @@ tmux:
 	mkdir -p $(XDG_CONFIG_HOME)/tmux
 	ln -sf $(DOTFILES_CONFIG_HOME)/tmux/tmux.conf $(XDG_CONFIG_HOME)/tmux/tmux.conf
 
+yabai:
+	mkdir -p $(XDG_CONFIG_HOME)/yabai
+	ln -sf $(DOTFILES_CONFIG_HOME)/yabai/yabairc $(XDG_CONFIG_HOME)/yabai/yabairc
+
 zsh:
 	mkdir -p $(XDG_CONFIG_HOME)/zsh
 	ln -sf $(DOTFILES_HOME)/.zshenv $(HOME)/.zshenv
@@ -56,4 +60,4 @@ zsh:
 		touch $(XDG_CONFIG_HOME)/zsh/.zshrc.local; \
 	fi
 
-all: alacritty git hammerspoon karabiner starship tmux zsh
+all: alacritty git hammerspoon karabiner nvim starship tmux yabai zsh

@@ -1,0 +1,32 @@
+#!/usr/bin/env sh
+
+# Exclude all applications except Alacritty and Firefox from
+yabai -m rule --add app!="^(Alacritty|Firefox Developer Edition)$" manage=off
+
+# Global settings
+yabai -m config                               \
+  debug_output                 off            \
+  focus_follows_mouse          autoraise      \
+  display_arranement_order     default        \
+  window_origin_display        default        \
+  window_placement             second_child   \
+  window_zoom_persist          on             \
+  insert_feedback_color        0xff83a598     \
+  split_ratio                  0.66666666     \
+  split_type                   auto           \
+  mouse_modifier               ctrl           \
+  mouse_action1                move           \
+  mouse_action2                resize         \
+  mouse_drop_action            swap
+
+# Space settings
+yabai -m config                               \
+  layout                       bsp            \
+  top_padding                  50             \
+  bottom_padding               50             \
+  left_padding                 25             \
+  right_padding                25             \
+  window_gap                   05             \
+  auto_balance                 on             \
+
+echo "yabai configuration loaded"
