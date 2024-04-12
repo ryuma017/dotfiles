@@ -191,7 +191,6 @@ return {
     end,
   },
 
-  -- completion
   {
     "hrsh7th/nvim-cmp",
     version = false,
@@ -201,18 +200,18 @@ return {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       'hrsh7th/cmp-cmdline',
-      {
-        "zbirenbaum/copilot.lua",
-        opts = {
-          suggestion = { enabled = false },
-          panel = { enabled = false },
-          filetypes = { ["*"] = true },
-        },
-      },
-      {
-        "zbirenbaum/copilot-cmp",
-        config = function() require("copilot_cmp").setup() end
-      },
+      -- {
+      --   "zbirenbaum/copilot.lua",
+      --   opts = {
+      --     suggestion = { enabled = false },
+      --     panel = { enabled = false },
+      --     filetypes = { ["*"] = true },
+      --   },
+      -- },
+      -- {
+      --   "zbirenbaum/copilot-cmp",
+      --   config = function() require("copilot_cmp").setup() end
+      -- },
     },
     config = function()
       vim.api.nvim_set_hl(0, "CmpItemAbbr", { link = "Normal" })
@@ -252,7 +251,7 @@ return {
           ["<cr>"] = cmp.mapping.confirm({ select = false }),
         },
         sources = cmp.config.sources({
-          { name = "copilot" },
+          -- { name = "copilot" },
           { name = "nvim_lsp" },
         }, {
           { name = "path" },
@@ -422,6 +421,24 @@ return {
       },
       extensions = { "lazy" },
     },
+  },
+
+  -- my friend
+  {
+    "github/copilot.vim",
+    event = "InsertEnter",
+    cmd = "Copilot",
+    config = function()
+      local map = function(key, fn)
+        vim.keymap.set("i", key, "<Plug>(" .. fn .. ")")
+      end
+      map("<M-l>", "copilot-accept-word")
+      map("<M-L>", "copilot-accept-line")
+      map("<M-j>", "copilot-next")
+      map("<M-k>", "copilot-previous")
+      map("<M-h>", "copilot-dismiss")
+      map("<M-;>", "copilot-suggest")
+    end,
   },
 
   {
