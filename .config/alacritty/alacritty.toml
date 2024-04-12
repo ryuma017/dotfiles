@@ -2,35 +2,73 @@ import = [
   "~/.config/alacritty/colors/base16-gruvbox-dark-hard.toml",
 ]
 
+[window]
+decorations = "Buttonless" # macOS exclusive
+option_as_alt = "Both" # macOS exclusive
+
+[scrolling]
+history = 0 # I'm in tmux all the time
+
 [font]
-size = 14.0
 normal = { family = "Iosevka Term SS09", style = "Extended" }
 bold = { family = "Iosevka Term SS09", style = "Bold Extended" }
 italic = { family = "Iosevka Term SS09", style = "Extended Italic" }
 bold_italic = { family = "Iosevka Term SS09", style = "Bold Extended Italic" }
+size = 14.0
 
-[[keyboard.bindings]]
-action = "ReceiveChar"
-key = "Space"
-mode = "~Search"
-mods = "Shift|Control"
+[colors]
+transparent_background_colors = true
 
-[[keyboard.bindings]]
-action = "ReceiveChar"
-key = "F"
-mode = "~Search"
-mods = "Command"
+[mouse]
+# disable default mouse bindings
+bindings = [
+  { mouse = "Left", action = "None" },
+  { mouse = "Right", action = "ReceiveChar" },
+  { mouse = "Right", mods = "Control", action = "ReceiveChar" },
+]
 
-[[keyboard.bindings]]
-action = "ReceiveChar"
-key = "B"
-mode = "~Search"
-mods = "Command"
-
-[scrolling]
-history = 0
-
-[window]
-decorations = "none"
-opacity = 0.9
-option_as_alt = "Both"
+[keyboard]
+# disable a bunch of default keybindings
+bindings = [
+  { key = "Paste", action = "ReceiveChar" },
+  { key = "Copy", action = "ReceiveChar" },
+  { key = "L", mods = "Control", action = "ReceiveChar" },
+  { key = "L", mods = "Control", mode = "~Vi|~Search", action = "ReceiveChar" },
+  # vi mode
+  { key = "Space", mods = "Shift|Control", mode = "~Search", action = "ReceiveChar" },
+  # macOS exclusive
+  { key = "K", mods = "Command", mode = "~Vi|~Search", action = "ReceiveChar" },
+  { key = "0", mods = "Command", action = "ReceiveChar" },
+  { key = "=", mods = "Command", action = "ReceiveChar" },
+  { key = "+", mods = "Command", action = "ReceiveChar" },
+  { key = "NumpadAdd", mods = "Command", action = "ReceiveChar" },
+  { key = "-", mods = "Command", action = "ReceiveChar" },
+  { key = "NumpadSubtract", mods = "Command", action = "ReceiveChar" },
+  { key = "V", mods = "Command", mode = "~Vi", action = "ReceiveChar" },
+  { key = "V", mods = "Command", mode = "Vi|Search", action = "ReceiveChar" },
+  { key = "C", mods = "Command", action = "ReceiveChar" },
+  { key = "C", mods = "Command", mode = "Vi|~Search", action = "ReceiveChar" },
+  { key = "H", mods = "Command", action = "ReceiveChar" },
+  { key = "H", mods = "Command|Alt", action = "ReceiveChar" },
+  { key = "M", mods = "Command", action = "ReceiveChar" },
+  { key = "Q", mods = "Command", action = "ReceiveChar" },
+  { key = "W", mods = "Command", action = "ReceiveChar" },
+  { key = "N", mods = "Command", action = "ReceiveChar" },
+  { key = "T", mods = "Command", action = "ReceiveChar" },
+  { key = "F", mods = "Command|Control", action = "ReceiveChar" },
+  { key = "F", mods = "Command", mode = "~Search", action = "ReceiveChar" },
+  { key = "B", mods = "Command", mode = "~Search", action = "ReceiveChar" },
+  { key = "]", mods = "Command|Shift", action = "ReceiveChar" },
+  { key = "[", mods = "Command|Shift", action = "ReceiveChar" },
+  { key = "Tab", mods = "Command", action = "ReceiveChar" },
+  { key = "Tab", mods = "Command|Shift", action = "ReceiveChar" },
+  { key = "1", mods = "Command", action = "ReceiveChar" },
+  { key = "2", mods = "Command", action = "ReceiveChar" },
+  { key = "3", mods = "Command", action = "ReceiveChar" },
+  { key = "4", mods = "Command", action = "ReceiveChar" },
+  { key = "5", mods = "Command", action = "ReceiveChar" },
+  { key = "6", mods = "Command", action = "ReceiveChar" },
+  { key = "7", mods = "Command", action = "ReceiveChar" },
+  { key = "8", mods = "Command", action = "ReceiveChar" },
+  { key = "9", mods = "Command", action = "ReceiveChar" },
+]
