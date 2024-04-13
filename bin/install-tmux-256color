@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# https://gist.github.com/bbqtd/a4ac060d6f6b9ea6fe3aabe735aa9d95#the-right-way
+
+set -e
+
+if [ ! -x /usr/bin/tic ]; then
+  exit 1
+fi
+
+tmpdir=$(mktemp -d)
+trap 'rm -r "$tmpdir"' EXIT
+
+printf "downloading the latest ncurses terminfo files and unpacking them... "
+
+curl -L https://invisible-island.net/datafiles/current/terminfo.src.gz 2>/dev/null | gunzip > "$tmpdir/terminfo.src"
+
+printf "downloaded (%s/terminfo.src)\n" "$tmpdir"
+printf "  this source file will be removed after the installation automatically\n"
+
+printf "compiling tmux-256color terminal info... "
+/usr/bin/tic -xe tmux-256color "$tmpdir/terminfo.src"
+printf "compiled\n"
+
+printf "\n=== infocmp -x tmux-256color ===\n"
+infocmp tmux-256color
+printf "===============================\n"
