@@ -55,6 +55,20 @@ local hotkeys = {
         .. " && " .. yabai("window --focus largest")
     )
   end),
+  hotkey.new({ "cmd" }, ",", function()
+    print("cmd-,")
+    local script = [[
+      yabai=/opt/homebrew/bin/yabai
+      jq=/opt/homebrew/bin/jq
+      type="$("$yabai" -m query --spaces | "$jq" '.[] | select(.["has-focus"] == true) | .type')"
+      if [ "$type" = '"bsp"' ]; then
+        "$yabai" -m space --layout stack
+      else
+        "$yabai" -m space --layout bsp
+      fi
+    ]]
+    exec(script)
+  end),
   hotkey.new({ "cmd" }, "h", function()
     exec(yabai("window --focus west"))
   end),
