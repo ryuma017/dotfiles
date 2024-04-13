@@ -19,7 +19,7 @@ opt.colorcolumn = "80"
 opt.confirm = true
 
 -- hightlight the current line
--- opt.cursorline = true
+opt.cursorline = true
 
 -- use ripgrep in smart-case mode for grepping
 opt.grepprg = "rg --vimgrep --smart-case"

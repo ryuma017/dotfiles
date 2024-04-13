@@ -7,15 +7,18 @@ return {
     config = function()
       vim.o.background = "dark"
       vim.cmd.colorscheme("base16-gruvbox-dark-hard")
-
-      local c = require("base16-colorscheme").colors
-      vim.api.nvim_set_hl(0, "Normal", { bg = nil })
-      vim.api.nvim_set_hl(0, "NormalNC", { bg = nil })
-      vim.api.nvim_set_hl(0, "SignColumn", { bg = nil })
-      vim.api.nvim_set_hl(0, "FoldColumn", { bg = nil })
-      vim.api.nvim_set_hl(0, "VertSplit", { bg = nil })
-      vim.api.nvim_set_hl(0, "LineNr", { fg = c.base03, ctermfg = c.cterm03 })
-      vim.api.nvim_set_hl(0, "CursorLineNr", { fg = c.base0D, ctermfg = c.cterm0D })
+      local colorscheme = require("base16-colorscheme")
+      local c = colorscheme.colors
+      local u = require("utils")
+      local hi = u.highlight
+      hi.LineNr = { guifg = c.base03, ctermfg = c.cterm03 }
+      hi.CursorLineNr = { guifg = c.base0D, guibg = "none" }
+      hi.CursorLine = { guibg = "none" }
+      hi.FloatBorder = { guifg = c.base03 }
+      hi.CmpItemAbbr = { guibg = "none" }
+      -- I think warining color should be yellow...
+      hi.DiagnosticWarn = { guifg = c.base0A }
+      hi.DiagnosticUnderlineWarn = { guisp = c.base0A }
     end,
   },
 
@@ -65,7 +68,7 @@ return {
     },
     config = function(_, opts)
       local fzf = require("fzf-lua")
-      fzf.register_ui_select()
+      -- fzf.register_ui_select()
       fzf.setup(opts)
     end,
   },
@@ -80,6 +83,7 @@ return {
         opts = {
           doc_lines = 0,
           handler_opts = { border = "single" },
+          hint_prefix = "",
         },
       },
       -- LSP based completion
@@ -154,38 +158,45 @@ return {
           map("gf", fzf.lsp_finder)
           map("<leader>D", fzf.lsp_typedefs)
           map("<leader>ds", fzf.lsp_document_symbols)
-          -- map("<leader>dd", fzf.diagnostics_document)
           map("<leader>ws", fzf.lsp_workspace_symbols)
-          -- map("<leader>wd", fzf.diagnostics_workspace)
-          map("<leader>a", fzf.lsp_code_actions)
-
+          -- use builtin LSP client's code action now, since fzf-lua's code
+          -- action function causes some errors and I don't know why
+          map("<leader>a", vim.lsp.buf.code_action --[[fzf.lsp_code_actions]])
           map("<leader>wa", vim.lsp.buf.add_workspace_folder)
           map("<leader>wr", vim.lsp.buf.remove_workspace_folder)
           map("<leader>wl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end)
           map("<leader>rn", vim.lsp.buf.rename)
-          -- map("<leader>fm", function() vim.lsp.buf.format { async = true } end)
+          --map("<leader>f", function() vim.lsp.buf.format { async = true } end)
           -- toggle inlay hints
           map("<leader>th", function() vim.lsp.inlay_hint(ev.buf) end)
 
           map("K", vim.lsp.buf.hover)
-          map("<C-k>", vim.lsp.buf.signature_help)
+          map("<C-s>", vim.lsp.buf.signature_help)
 
           local client = vim.lsp.get_client_by_id(ev.data.client_id)
           client.server_capabilities.semanticTokensProvider = nil
 
-          require('lspconfig.ui.windows').default_options.border = 'single'
+          require('lspconfig.ui.windows').default_options.border = "single"
 
+          -- disable inline diagnostic messages
+          vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+            vim.lsp.diagnostic.on_publish_diagnostics,
+            { virtual_text = false }
+          )
+
+          -- set border for textDocument/hover and textDocument/signatureHelp
           vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
             vim.lsp.handlers.hover,
             { border = "single" }
           )
-
           vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
             vim.lsp.handlers.signature_help,
             { border = "single" }
           )
-
-          vim.diagnostic.config({ float = { border= "single" } })
+          vim.diagnostic.config({
+            float = { border= "single" },
+            severity_sort = true,
+          })
         end
       })
     end,
@@ -200,22 +211,8 @@ return {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       'hrsh7th/cmp-cmdline',
-      -- {
-      --   "zbirenbaum/copilot.lua",
-      --   opts = {
-      --     suggestion = { enabled = false },
-      --     panel = { enabled = false },
-      --     filetypes = { ["*"] = true },
-      --   },
-      -- },
-      -- {
-      --   "zbirenbaum/copilot-cmp",
-      --   config = function() require("copilot_cmp").setup() end
-      -- },
     },
     config = function()
-      vim.api.nvim_set_hl(0, "CmpItemAbbr", { link = "Normal" })
-
       local cmp = require("cmp")
 
       cmp.event:on(
@@ -225,7 +222,7 @@ return {
 
       local window_opts = cmp.config.window.bordered({
         border = "single",
-        winblend = 10,
+        scrollbar = false,
       })
 
       local select_next_item = {
@@ -251,7 +248,6 @@ return {
           ["<cr>"] = cmp.mapping.confirm({ select = false }),
         },
         sources = cmp.config.sources({
-          -- { name = "copilot" },
           { name = "nvim_lsp" },
         }, {
           { name = "path" },
@@ -262,7 +258,7 @@ return {
           documentation = window_opts,
         },
         experimental = {
-          ghost_text = true,
+          ghost_text = false,
         },
       })
 
@@ -280,7 +276,7 @@ return {
         }, {
           { name = 'cmdline' }
         }),
-        -- matching = { disallow_symbol_nonprefix_matching = false }
+        matching = { disallow_symbol_nonprefix_matching = false }
       })
     end,
   },
@@ -426,8 +422,6 @@ return {
   -- my friend
   {
     "github/copilot.vim",
-    event = "InsertEnter",
-    cmd = "Copilot",
     config = function()
       local map = function(key, fn)
         vim.keymap.set("i", key, "<Plug>(" .. fn .. ")")
@@ -498,6 +492,18 @@ return {
         char = { "", "▏" },
       },
       scope = { enabled = false },
+    },
+  },
+
+  -- notifications and LSP progress messages
+  {
+    "j-hui/fidget.nvim",
+    event = "VeryLazy",
+    opts = {
+      notification = {
+        override_vim_notify = true,
+        window = { x_padding = 0 },
+      },
     },
   },
 
