@@ -1,12 +1,13 @@
 #!/usr/bin/env sh
 
 # Exclude all applications except Alacritty and Firefox from
-yabai -m rule --add app!="^(Alacritty|Firefox Developer Edition)$" manage=off
+yabai -m rule \
+  --add app!="^(Alacritty|Firefox Developer Edition|neovide)$" manage=off
 
 # Global settings
 yabai -m config                               \
   debug_output                 off            \
-  focus_follows_mouse          autoraise      \
+  focus_follows_mouse          autofocus      \
   display_arranement_order     default        \
   window_origin_display        default        \
   window_placement             second_child   \
