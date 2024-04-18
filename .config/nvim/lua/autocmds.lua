@@ -50,3 +50,13 @@ autocmd("BufReadPost", {
     end
   end,
 })
+
+-- reload buffer if it changed outside of neovim
+autocmd({ "FocusGained", "CursorHold", "TermClose", "TermLeave" }, {
+  group = augroup("checktime"),
+  callback = function()
+    if vim.o.buftype ~= "nofile" then
+      vim.cmd("checktime")
+    end
+  end,
+})
