@@ -28,6 +28,7 @@ PATH="$(prependpath "$PATH" /usr/sbin)"
 PATH="$(prependpath "$PATH" /usr/bin)"
 PATH="$(prependpath "$PATH" /usr/local/sbin)"
 PATH="$(prependpath "$PATH" /usr/local/bin)"
+PATH="$(prependpath "$PATH" /usr/local/go/bin)"
 
 # homebrew
 if [ -r "/opt/homebrew" ]; then
@@ -48,8 +49,9 @@ if [ -r "/opt/homebrew" ]; then
   MANPATH="$(prependpath "$MANPATH": "${HOMEBREW_PREFIX}/share/man")"
 fi
 
-# home specific
+# home
 PATH=$(prependpath "$PATH" "$HOME/.local/bin")
+PATH=$(prependpath "$PATH" "$HOME/.local/share/go/bin")
 PATH=$(prependpath "$PATH" "$HOME/.cargo/bin")
 
 export PATH MANPATH
@@ -69,6 +71,8 @@ export EDITOR=nvim
 # disable less history
 export LESSHISTFILE=-
 
+export GOPATH="$XDG_DATA_HOME/go"
+
 if cmd-exists starship; then
   export STARSHIP_CONFIG="${XDG_CONFIG_HOME}/starship/starship.toml"
   export STARSHIP_CACHE="${XDG_CACHE_HOME}/starship"
@@ -78,7 +82,12 @@ if cmd-exists bat; then
   export BAT_THEME="base16"
 fi
 
+if cmd-exists docker; then
+  export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
+fi
+
 if cmd-exists fzf; then
+  export FZF_TMUX_OPTS="-p 80%"
   export FZF_DEFAULT_COMMAND="fd --type file --follow"
   export FZF_DEFAULT_OPTS="
     --color='dark,gutter:-1,pointer:red'
