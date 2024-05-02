@@ -23,10 +23,13 @@
   "nvim-cmp": { "branch": "main", "commit": "ce16de5665c766f39c271705b17fff06f7bcb84f" },
   "nvim-lspconfig": { "branch": "master", "commit": "b3014f2209503944f2714cf27c95591433a0c7d8" },
   "nvim-rooter.lua": { "branch": "main", "commit": "fe2343901c1777316823e3c6a34718eea8dedf37" },
+  "nvim-scrollbar": { "branch": "main", "commit": "35f99d559041c7c0eff3a41f9093581ceea534e8" },
   "nvim-treesitter": { "branch": "master", "commit": "7e6b044be8187c4c28dffa90ad0dc623dbe243f3" },
   "nvim-treesitter-context": { "branch": "master", "commit": "f19766163c18515fb4d3c12d572bf9cba6cdb990" },
   "nvim-ts-context-commentstring": { "branch": "main", "commit": "734ebad31c81c6198dfe102aa23280937c937c42" },
+  "nvim-web-devicons": { "branch": "master", "commit": "b3468391470034353f0e5110c70babb5c62967d3" },
   "plenary.nvim": { "branch": "master", "commit": "8aad4396840be7fc42896e3011751b7609ca4119" },
   "rust.vim": { "branch": "master", "commit": "889b9a7515db477f4cb6808bef1769e53493c578" },
+  "vim-illuminate": { "branch": "master", "commit": "e522e0dd742a83506db0a72e1ced68c9c130f185" },
   "vim-matchup": { "branch": "master", "commit": "2d660e4aa7c566014c667af2cda0458043527902" }
 }

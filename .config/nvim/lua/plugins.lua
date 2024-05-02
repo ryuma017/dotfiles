@@ -16,9 +16,13 @@ return {
       hi.CursorLine = { guibg = "none" }
       hi.FloatBorder = { guifg = c.base03 }
       hi.CmpItemAbbr = { guibg = "none" }
-      -- I think warining color should be yellow...
+
       hi.DiagnosticWarn = { guifg = c.base0A }
       hi.DiagnosticUnderlineWarn = { guisp = c.base0A }
+
+      hi.IlluminatedWordText = { guibg = c.base01, gui = "none" }
+      hi.IlluminatedWordRead = { guibg = c.base01, gui = "none" }
+      hi.IlluminatedWordWrite = { guibg = c.base01, gui = "none" }
     end,
   },
 
@@ -339,6 +343,7 @@ return {
     cmd = "Neotree",
     dependencies = {
       "nvim-lua/plenary.nvim",
+      -- "nvim-tree/nvim-web-devicons",
       "MunifTanjim/nui.nvim",
     },
     -- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/1247#issuecomment-1836294270
@@ -620,5 +625,26 @@ return {
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     ft = { "markdown" },
     build = function() vim.fn["mkdp#util#install"]() end,
+  },
+
+  {
+    "RRethy/vim-illuminate",
+    event = "BufRead",
+    opts = { large_file_cutoff = 2000 },
+    config = function(_, opts)
+      require("illuminate").configure(opts)
+    end,
+  },
+
+  {
+    "petertriho/nvim-scrollbar",
+    event = "VeryLazy",
+    opts = {
+      excluded_filetypes = { "neo-tree" }
+    },
+    config = function(_, opts)
+      require("scrollbar").setup(opts)
+      require("scrollbar.handlers.gitsigns").setup()
+    end,
   },
 }
