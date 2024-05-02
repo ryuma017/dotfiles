@@ -5,16 +5,20 @@ import = [
 [window]
 decorations = "Buttonless" # macOS exclusive
 option_as_alt = "Both" # macOS exclusive
+opacity = 0.80
+blur = true
 
 [scrolling]
 history = 0 # I'm in tmux all the time
 
 [font]
-normal = { family = "Iosevka Term SS09", style = "Extended" }
-bold = { family = "Iosevka Term SS09", style = "Bold Extended" }
-italic = { family = "Iosevka Term SS09", style = "Extended Italic" }
-bold_italic = { family = "Iosevka Term SS09", style = "Bold Extended Italic" }
-size = 14.0
+# normal = { family = "Iosevka Term SS09", style = "Extended" }
+# bold = { family = "Iosevka Term SS09", style = "Bold Extended" }
+# italic = { family = "Iosevka Term SS09", style = "Extended Italic" }
+# bold_italic = { family = "Iosevka Term SS09", style = "Bold Extended Italic" }
+normal = { family = "Hack Nerd Font" }
+size = 13.5
+offset = { y = 3 }
 
 [colors]
 transparent_background_colors = true
