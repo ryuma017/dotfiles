@@ -23,10 +23,10 @@ yabai -m config                               \
 # Space settings
 yabai -m config                               \
   layout                       bsp            \
-  top_padding                  50             \
-  bottom_padding               50             \
-  left_padding                 25             \
-  right_padding                25             \
+  top_padding                  30             \
+  bottom_padding               30             \
+  left_padding                 20             \
+  right_padding                20             \
   window_gap                   05             \
   auto_balance                 on             \
 
