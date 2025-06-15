@@ -1,14 +1,18 @@
 #!/usr/bin/env sh
 
+# yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+# sudo yabai --load-sa
+
 # Exclude all applications except Alacritty and Firefox from
 yabai -m rule \
-  --add app!="^(Alacritty|Firefox Developer Edition|neovide)$" manage=off
+  --add app!="^(Alacritty|Firefox Developer Edition)$" manage=off
+yabai -m rule --apply
 
 # Global settings
 yabai -m config                               \
   debug_output                 off            \
   focus_follows_mouse          autofocus      \
-  display_arranement_order     default        \
+  display_arrangement_order     default        \
   window_origin_display        default        \
   window_placement             second_child   \
   window_zoom_persist          on             \
