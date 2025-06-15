@@ -1,3 +1,4 @@
+[general]
 import = [
   "~/.config/alacritty/colors/base16-gruvbox-dark-hard.toml",
 ]
