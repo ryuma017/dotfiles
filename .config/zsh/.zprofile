@@ -53,4 +53,9 @@ show-buffers()
 zle -N show-buffers
 bindkey "^[o" show-buffers
 
+fpath=(
+  ${fpath}
+  /Applications/OrbStack.app/Contents/MacOS/../Resources/completions/zsh(N-/)
+)
+
 [ -r "${ZDOTDIR}/.zprofile.local" ] && . "${ZDOTDIR}/.zprofile.local"
