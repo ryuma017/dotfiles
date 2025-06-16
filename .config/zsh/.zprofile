@@ -53,6 +53,10 @@ show-buffers()
 zle -N show-buffers
 bindkey "^[o" show-buffers
 
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^o' edit-command-line
+
 fpath=(
   ${fpath}
   /Applications/OrbStack.app/Contents/MacOS/../Resources/completions/zsh(N-/)
