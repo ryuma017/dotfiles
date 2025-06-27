@@ -94,34 +94,37 @@ return {
       { "hrsh7th/cmp-nvim-lsp" },
     },
     config = function(_, opts)
-      local lspconfig = require("lspconfig")
-      local capabilities = require('cmp_nvim_lsp').default_capabilities()
+      vim.lsp.config("*", {
+        capabilities = require('cmp_nvim_lsp').default_capabilities(),
+      })
 
-      -- ♡ Rust ♡
-      lspconfig.rust_analyzer.setup({
-        capabilities = capabilities,
+      -- Rust
+      vim.lsp.config("rust_analyzer", {
         settings = {
           ["rust-analyzer"] = {
             cargo = { features = "all" },
+            checkOnSave = { enable = true },
             check = { command = "clippy" },
           },
         },
       })
+      vim.lsp.enable("rust_analyzer")
 
       -- Toml
-      lspconfig.taplo.setup({ capabilities = capabilities })
+      if vim.fn.executable("taplo") == 1 then
+        vim.lsp.enable("taplo")
+      end
 
       -- Go
-      lspconfig.gopls.setup({
+      vim.lsp.config("gopls", {
         on_attach = function(client, bufnr)
           vim.bo[bufnr].expandtab = false
           vim.bo[bufnr].tabstop = 8
           vim.bo[bufnr].shiftwidth = 8
           vim.bo[bufnr].softtabstop = 8
         end,
-        capabilities = capabilities,
         settings = {
-          gopls = {
+          ["gopls"] = {
             analyses = {
               shadow = true,
               unusedvariable = true,
@@ -132,11 +135,12 @@ return {
           },
         },
       })
+      vim.lsp.enable("gopls")
 
       -- Bash
-      lspconfig.bashls.setup({
-        capabilities = capabilities,
-      })
+      if vim.fn.executable("bash-language-server") == 1 then
+        vim.lsp.enable("bashls")
+      end
 
       -- global mappings
       vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
@@ -171,13 +175,22 @@ return {
           map("<leader>wl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end)
           map("<leader>rn", vim.lsp.buf.rename)
           --map("<leader>f", function() vim.lsp.buf.format { async = true } end)
-          -- toggle inlay hints
-          map("<leader>th", function() vim.lsp.inlay_hint(ev.buf) end)
-
-          map("K", vim.lsp.buf.hover)
+          map("K", function() vim.lsp.buf.hover({ border = "single" }) end)
           map("<C-s>", vim.lsp.buf.signature_help)
 
           local client = vim.lsp.get_client_by_id(ev.data.client_id)
+          if client.server_capabilities.inlayHintProvider then
+            map(
+              "<leader>th",
+              function()
+                vim.lsp.inlay_hint.enable(
+                  not vim.lsp.inlay_hint.is_enabled({ bufnr = ev.buf }),
+                  { bufnr = ev.buf }
+                )
+              end
+            )
+          end
+
           client.server_capabilities.semanticTokensProvider = nil
 
           require('lspconfig.ui.windows').default_options.border = "single"
