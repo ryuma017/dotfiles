@@ -25,6 +25,8 @@ offset = { y = 3 }
 transparent_background_colors = true
 
 [mouse]
+# temporarily hide mouse cursor when typing
+hide_when_typing = true
 # disable default mouse bindings
 bindings = [
   { mouse = "Left", action = "None" },
